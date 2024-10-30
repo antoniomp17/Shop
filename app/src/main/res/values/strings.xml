@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CabifyChallenge</string>
+
+    <string name="search">Buscar…</string>
+
+    <string name="shopping_cart_icon_description">Shopping cart icon</string>
+
+    <string name="euroSymbol">€</string>
+
+    <string name="add_item">Añadir</string>
+
+</resources>
