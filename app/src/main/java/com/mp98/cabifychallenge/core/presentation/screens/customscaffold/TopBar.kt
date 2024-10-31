@@ -3,6 +3,7 @@ package com.mp98.cabifychallenge.core.presentation.screens.customscaffold
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Mic
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -15,7 +16,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import com.mp98.cabifychallenge.R
+import com.mp98.cabifychallenge.core.utils.scalableText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -25,7 +28,12 @@ fun TopBar(){
             OutlinedTextField(
                 value = "",
                 onValueChange = {},
-                placeholder = { Text(stringResource(R.string.search)) },
+                placeholder = {
+                    Text(
+                        text = stringResource(R.string.search),
+                        fontSize = scalableText(16.sp),
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight(),
@@ -37,7 +45,7 @@ fun TopBar(){
                     {
                         Icon(
                             imageVector = Icons.Rounded.Search,
-                            contentDescription = "Icono de buscar"
+                            contentDescription = Icons.Rounded.Search.name
                         )
 
                     }
@@ -47,9 +55,8 @@ fun TopBar(){
                     IconButton(onClick = {})
                     {
                         Icon(
-                            //TODO: Add mic icon
-                            imageVector = Icons.Rounded.Search,
-                            contentDescription = "Icono de Micrófono"
+                            imageVector = Icons.Rounded.Mic,
+                            contentDescription = Icons.Rounded.Mic.name
                         )
 
                     }
@@ -66,7 +73,7 @@ fun TopBar(){
             {
                 Icon(
                     imageVector = Icons.Rounded.ShoppingCart,
-                    contentDescription = stringResource(R.string.shopping_cart_icon_description)
+                    contentDescription = Icons.Rounded.ShoppingCart.name
                 )
             }
         }

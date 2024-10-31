@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.mp98.cabifychallenge"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mp98.cabifychallenge"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -71,4 +71,7 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+
+    // Icons Extended
+    implementation(libs.androidx.material.icons.extended)
 }

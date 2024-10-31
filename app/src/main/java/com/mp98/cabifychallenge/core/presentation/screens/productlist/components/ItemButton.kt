@@ -2,6 +2,7 @@ package com.mp98.cabifychallenge.core.presentation.screens.productlist.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,13 +20,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mp98.cabifychallenge.R
+import com.mp98.cabifychallenge.core.utils.dynamicPadding
+import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.ui.theme.CabifyPurple80
 
 @Composable
 fun ItemButton() {
     Row (horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(8.dp)){
+        modifier = Modifier.dynamicPadding()){
 
         Button(
             onClick = {},
@@ -37,14 +40,14 @@ fun ItemButton() {
             ),
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .padding(8.dp)
-                .height(48.dp)
+                .dynamicPadding()
+                .aspectRatio(3f)
                 .fillMaxWidth(fraction = 0.75f)
         ) {
             Text(
                 text = stringResource(id = R.string.add_item),
                 style = TextStyle(
-                    fontSize = 16.sp,
+                    fontSize = scalableText(16.sp),
                     fontWeight = FontWeight.Bold
                 )
             )

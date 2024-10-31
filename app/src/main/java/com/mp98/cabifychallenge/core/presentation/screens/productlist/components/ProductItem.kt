@@ -2,26 +2,23 @@ package com.mp98.cabifychallenge.core.presentation.screens.productlist.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.mp98.cabifychallenge.R
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.presentation.models.ProductImage
+import com.mp98.cabifychallenge.core.utils.dynamicPadding
+import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -32,9 +29,9 @@ fun ProductItem(
 ){
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(320.dp)
-            .padding(4.dp),
+            .fillMaxWidth(fraction = 0.5f)
+            .aspectRatio(0.6f)
+            .dynamicPadding(),
         shape = ShapeDefaults.Large,
         onClick = {
             onSelectProduct()
@@ -46,8 +43,8 @@ fun ProductItem(
 
             GlideImage(
                 modifier = Modifier
-                    .padding(top = 16.dp, end = 8.dp, start = 8.dp, bottom = 8.dp)
-                    .size(128.dp),
+                    .dynamicPadding()
+                    .fillMaxSize(fraction = 0.4f),
                 model = ProductImage.fromId(product.code)?.imageUrl,
                 contentDescription = product.name
             )
@@ -55,17 +52,17 @@ fun ProductItem(
             Text(
                 text = product.name,
                 textAlign = TextAlign.Center,
-                fontSize = 18.sp,
+                fontSize = scalableText(16.sp),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .dynamicPadding()
             )
 
             Text(
                 text = product.price.toCurrencyFormat(),
                 textAlign = TextAlign.Center,
-                fontSize = 18.sp,
+                fontSize = scalableText(18.sp),
                 modifier = Modifier
-                    .padding(8.dp)
+                    .dynamicPadding()
             )
 
             ItemButton()
