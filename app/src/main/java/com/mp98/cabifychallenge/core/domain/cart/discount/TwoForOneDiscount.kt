@@ -2,10 +2,10 @@ package com.mp98.cabifychallenge.core.domain.cart.discount
 
 import com.mp98.cabifychallenge.core.domain.model.Product
 
-class TwoForOneDiscount(val productCode: String, private val price: Double) : Discount {
+open class TwoForOneDiscount(val product: Product) : Discount {
 
     override fun applyDiscount(items: List<Product>): Double {
-        val eligibleItems = items.filter { it.code == productCode }
+        val eligibleItems = items.filter { it.code == product.code }
 
         val noDiscountPrice = eligibleItems.sumOf { it.price }
         var discount = 0.0

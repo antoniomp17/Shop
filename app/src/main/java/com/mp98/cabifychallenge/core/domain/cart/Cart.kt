@@ -1,11 +1,9 @@
 package com.mp98.cabifychallenge.core.domain.cart
 
-import com.mp98.cabifychallenge.core.domain.cart.discount.BulkDiscount
 import com.mp98.cabifychallenge.core.domain.cart.discount.Discount
-import com.mp98.cabifychallenge.core.domain.cart.discount.TwoForOneDiscount
 import com.mp98.cabifychallenge.core.domain.model.Product
 
-class Cart(private val discounts: List<Discount>) {
+class Cart(private val discounts: List<Discount?>) {
 
     private val items = mutableListOf<Product>()
 
@@ -17,7 +15,7 @@ class Cart(private val discounts: List<Discount>) {
         var total = items.sumOf { it.price }
 
         for (discount in discounts) {
-            total -= discount.applyDiscount(items)
+            total -= discount?.applyDiscount(items) ?: 0.0
         }
         return total
     }
