@@ -3,12 +3,13 @@ package com.mp98.cabifychallenge.core.domain.cart
 import com.mp98.cabifychallenge.core.domain.cart.discount.Discount
 import com.mp98.cabifychallenge.core.domain.model.Product
 
-class Cart(private val discounts: List<Discount?>) {
+data class Cart(
+    private val discounts: List<Discount?>,
+    val items: List<Product> = listOf()
+) {
 
-    private val items = mutableListOf<Product>()
-
-    fun addProduct(product: Product) {
-        items.add(product)
+    fun addProduct(product: Product): Cart {
+        return this.copy(items = this.items + product)
     }
 
     fun calculateTotal(): Double {

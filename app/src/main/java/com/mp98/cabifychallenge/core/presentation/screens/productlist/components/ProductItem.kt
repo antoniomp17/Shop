@@ -17,6 +17,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.presentation.models.ProductImage
+import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
@@ -25,6 +26,7 @@ import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
 @Composable
 fun ProductItem(
     product: Product,
+    productCartViewModel: ProductCartViewModel,
     onSelectProduct: () -> Unit
 ){
     Card(
@@ -65,7 +67,10 @@ fun ProductItem(
                     .dynamicPadding()
             )
 
-            ItemButton()
+            ItemButton(
+                product = product,
+                productCartViewModel = productCartViewModel
+            )
         }
     }
 }

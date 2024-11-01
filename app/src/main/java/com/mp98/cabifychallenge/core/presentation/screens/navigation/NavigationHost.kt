@@ -5,15 +5,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.mp98.cabifychallenge.core.presentation.screens.productlist.ProductList
+import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 
 @Composable
 fun NavigationHost(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    productCartViewModel: ProductCartViewModel
 ){
 
     NavHost(navController = navHostController, startDestination = NavigationRoute.ProductListScreen.route){
         composable(NavigationRoute.ProductListScreen.route) {
-            ProductList()
+            ProductList(productCartViewModel = productCartViewModel)
         }
     }
 
