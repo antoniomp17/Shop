@@ -21,7 +21,7 @@ fun ProductList(productCartViewModel: ProductCartViewModel){
         columns = GridCells.Fixed(2),
         state = gridState,
         content = {
-            items(items = state.products,
+            items(items = state.filteredProducts,
                 contentType = { it }
             ){
                 ProductItem(

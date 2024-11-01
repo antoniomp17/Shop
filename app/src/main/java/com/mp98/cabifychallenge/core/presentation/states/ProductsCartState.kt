@@ -9,6 +9,8 @@ data class ProductsCartState(
     val cart: Cart = Cart(discounts = emptyList()),
     val total: Double = 0.0,
 
-    val showDiscountDialog: String? = null
+    val showDiscountDialog: String? = null,
+    val searchText: String = "",
+    val filteredProducts: List<Product> = emptyList(),
 
 )

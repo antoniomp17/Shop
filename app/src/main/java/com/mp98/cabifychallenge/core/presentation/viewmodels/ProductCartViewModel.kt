@@ -1,5 +1,8 @@
 package com.mp98.cabifychallenge.core.presentation.viewmodels
 
+import android.content.Intent
+import android.speech.RecognizerIntent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
@@ -11,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +25,8 @@ class ProductCartViewModel @Inject constructor(
     private val _productsCartState = MutableStateFlow(ProductsCartState())
     val productsCartState: StateFlow<ProductsCartState> get() = _productsCartState
 
+    private var _voiceSearchLauncher: ActivityResultLauncher<Intent>? = null
+
     init {
         fetchProducts()
     }
@@ -30,10 +36,11 @@ class ProductCartViewModel @Inject constructor(
             try {
                 val products = getProductsUseCase()
                 _productsCartState.update {
-                    state -> state.copy(products = products)
+                    state -> state.copy(
+                        products = products,
+                        filteredProducts = products
+                    )
                 }
-
-                modifyDiscountsForCabifyChallenge()
 
                 applyDiscounts()
 
@@ -77,26 +84,40 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    private fun modifyDiscountsForCabifyChallenge(){
-        val productsWithDiscount = productsCartState.value.products.map { product ->
-            when (product.code) {
-                Product.VOUCHER-> {
-                    product.copy(discount = DiscountType.TWO_FOR_ONE_DISCOUNT)
-                }
-                Product.T_SHIRT -> {
-                    product.copy(
-                        discount = DiscountType.BULK_DISCOUNT,
-                        discountPrice = 19.0,
-                        minQuantity = 3
-                    )
-                }
-                else -> {
-                    product
-                }
-            }
-        }
+    fun onSearchTextChanged(newText: String) {
         _productsCartState.update { state ->
-            state.copy(products = productsWithDiscount)
+            state.copy(searchText = newText)
         }
+    }
+
+    fun searchProducts() {
+        val query = _productsCartState.value.searchText
+        _productsCartState.update { state ->
+            state.copy(
+                filteredProducts = state.products.filter {
+                    it.name.contains(query, ignoreCase = true) ||
+                            it.code.contains(query, ignoreCase = true)
+                }
+            )
+        }
+    }
+
+    fun onVoiceSearchResult(text: String) {
+        onSearchTextChanged(text)
+        searchProducts()
+    }
+
+    fun setVoiceSearchLauncher(launcher: ActivityResultLauncher<Intent>) {
+        _voiceSearchLauncher = launcher
+    }
+
+    // Función para iniciar el reconocimiento de voz
+    fun launchVoiceSearch() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to search")
+        }
+        _voiceSearchLauncher?.launch(intent)
     }
 }

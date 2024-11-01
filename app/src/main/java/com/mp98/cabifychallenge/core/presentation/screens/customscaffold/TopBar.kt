@@ -15,7 +15,7 @@ fun TopBar(productCartViewModel: ProductCartViewModel){
     CenterAlignedTopAppBar(
         modifier = Modifier.dynamicPadding(),
         title = {
-            SearchBar()
+            SearchBar(productCartViewModel = productCartViewModel)
         },
         actions = {
             CartButton(productCartViewModel = productCartViewModel)
