@@ -25,6 +25,10 @@ data class Cart(
         return this.copy(discounts = discounts)
     }
 
+    fun getProductsOfCode(code: String): List<Product> {
+        return items.filter { it.code == code }
+    }
+
     private fun calculateTotal(): Double {
         var total = items.sumOf { it.price }
 

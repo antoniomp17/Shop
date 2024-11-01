@@ -30,7 +30,7 @@ import com.mp98.cabifychallenge.core.presentation.states.ProductsCartState
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
-import com.mp98.cabifychallenge.ui.theme.CabifyPurpleGray80
+import com.mp98.cabifychallenge.ui.theme.secondaryColor
 
 @Composable
 fun AddOrRemoveButton(
@@ -47,11 +47,11 @@ fun AddOrRemoveButton(
             .aspectRatio(3f)
             .fillMaxWidth(fraction = 0.75f)
             .background(
-                color = Color(CabifyPurpleGray80.value),
+                color = Color(secondaryColor.value),
                 shape = RoundedCornerShape(16.dp)
             )
             .border(
-                border = BorderStroke(1.dp, Color(CabifyPurpleGray80.value)),
+                border = BorderStroke(1.dp, Color(secondaryColor.value)),
                 shape = RoundedCornerShape(16.dp)
             )
     ){
@@ -62,7 +62,7 @@ fun AddOrRemoveButton(
             state = state
         )
         Text(
-            text = state.cart.items.size.toString(),
+            text = productCartViewModel.getProductsOfCode(product.code).size.toString(),
             modifier = Modifier.dynamicPadding().weight(1f),
             textAlign = TextAlign.Center,
             style = TextStyle(

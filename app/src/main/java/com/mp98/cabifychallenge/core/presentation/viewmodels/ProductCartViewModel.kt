@@ -68,8 +68,12 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    private fun modifyDiscountsForCabifyChallenge(){
+    fun getProductsOfCode(code: String): List<Product> {
+        return productsCartState.value.cart.getProductsOfCode(code)
+    }
 
+
+    private fun modifyDiscountsForCabifyChallenge(){
         val productsWithDiscount = productsCartState.value.products.map { product ->
             when (product.code) {
                 "VOUCHER" -> {
@@ -87,7 +91,6 @@ class ProductCartViewModel @Inject constructor(
                 }
             }
         }
-
         _productsCartState.update { state ->
             state.copy(products = productsWithDiscount)
         }
