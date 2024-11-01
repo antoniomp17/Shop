@@ -17,11 +17,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
+import com.mp98.cabifychallenge.R
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.presentation.models.ProductImage
@@ -30,6 +34,7 @@ import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
 import com.mp98.cabifychallenge.ui.theme.primaryColor
+
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -91,7 +96,10 @@ fun ProductItem(
                     .fillMaxSize(fraction = 0.4f)
                     .weight(1f),
                 model = ProductImage.fromId(product.code)?.imageUrl,
-                contentDescription = product.name
+                contentDescription = product.name,
+                loading = placeholder(
+                    CircularProgressDrawable(LocalContext.current).apply { start() }
+                )
             )
 
             Text(

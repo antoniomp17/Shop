@@ -2,6 +2,7 @@ package com.mp98.cabifychallenge.core.presentation.states
 
 import com.mp98.cabifychallenge.core.domain.cart.Cart
 import com.mp98.cabifychallenge.core.domain.model.Product
+import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 
 data class ProductsCartState(
 
@@ -12,5 +13,6 @@ data class ProductsCartState(
     val showDiscountDialog: String? = null,
     val searchText: String = "",
     val filteredProducts: List<Product> = emptyList(),
+    val screen: NavigationRoute = NavigationRoute.ProductListScreen
 
 )

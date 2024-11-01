@@ -5,7 +5,6 @@ import com.mp98.cabifychallenge.core.data.mapper.toDomain
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.domain.repositories.ProductRepository
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(

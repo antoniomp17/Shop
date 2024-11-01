@@ -11,14 +11,19 @@ import com.mp98.cabifychallenge.core.utils.dynamicPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(productCartViewModel: ProductCartViewModel){
+fun TopBar(
+    productCartViewModel: ProductCartViewModel,
+    onChangeToCart: () -> Unit
+){
     CenterAlignedTopAppBar(
         modifier = Modifier.dynamicPadding(),
         title = {
             SearchBar(productCartViewModel = productCartViewModel)
         },
         actions = {
-            CartButton(productCartViewModel = productCartViewModel)
+            CartButton(productCartViewModel = productCartViewModel){
+                onChangeToCart()
+            }
         }
     )
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.domain.usecases.GetProductsUseCase
+import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.states.ProductsCartState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -111,7 +112,6 @@ class ProductCartViewModel @Inject constructor(
         _voiceSearchLauncher = launcher
     }
 
-    // Función para iniciar el reconocimiento de voz
     fun launchVoiceSearch() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
@@ -120,4 +120,11 @@ class ProductCartViewModel @Inject constructor(
         }
         _voiceSearchLauncher?.launch(intent)
     }
+
+    fun changeScreen(screen: NavigationRoute){
+        _productsCartState.update { state ->
+            state.copy(screen = screen)
+        }
+    }
+
 }

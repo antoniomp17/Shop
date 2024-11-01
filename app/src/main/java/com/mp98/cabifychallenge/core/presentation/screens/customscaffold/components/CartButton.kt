@@ -26,7 +26,10 @@ import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
 
 @Composable
-fun CartButton(productCartViewModel: ProductCartViewModel){
+fun CartButton(
+    productCartViewModel: ProductCartViewModel,
+    onChangeToCart: () -> Unit
+){
 
     val state by productCartViewModel.productsCartState.collectAsState()
 
@@ -52,7 +55,7 @@ fun CartButton(productCartViewModel: ProductCartViewModel){
             IconButton(
                 onClick =
                 {
-
+                    onChangeToCart()
                 }
             )
             {

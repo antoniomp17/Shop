@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.CustomScaffold
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationHost
+import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.ui.theme.CabifyChallengeTheme
 
@@ -23,6 +24,12 @@ fun CabifyChallengeMainContent(productCartViewModel: ProductCartViewModel = hilt
                 NavigationHost(
                     navHostController = navHostController,
                     productCartViewModel = productCartViewModel)
+            },
+            onChangeToCart = {
+                navHostController.navigate(NavigationRoute.CartListScreen.route)
+            },
+            onChangeToProducts = {
+                navHostController.navigate(NavigationRoute.ProductListScreen.route)
             }
         )
     }
