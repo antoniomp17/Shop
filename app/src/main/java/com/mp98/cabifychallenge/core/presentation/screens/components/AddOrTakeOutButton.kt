@@ -1,4 +1,4 @@
-package com.mp98.cabifychallenge.core.presentation.screens.productlist.components
+package com.mp98.cabifychallenge.core.presentation.screens.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -33,11 +33,11 @@ import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.ui.theme.secondaryColor
 
 @Composable
-fun AddOrRemoveButton(
+fun AddOrTakeOutButton(
     product: Product,
     productCartViewModel: ProductCartViewModel,
     state: ProductsCartState,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ){
 
     Row(

@@ -21,7 +21,7 @@ fun CartList(productCartViewModel: ProductCartViewModel){
         columns = GridCells.Fixed(1),
         state = gridState,
         content = {
-            items(items = state.cart.items,
+            items(items = state.cart.items.distinct().sortedBy { it.code },
                 contentType = { it }
             ){
                 CartItem(

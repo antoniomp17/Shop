@@ -12,13 +12,13 @@ data class Cart(
     fun addProduct(product: Product): Cart {
         val newCart = this.copy(
             items = this.items + product)
-        return newCart.copy(total = newCart.calculateTotal())
+        return newCart.copy(total = newCart.calculateTotal(newCart.items))
     }
 
     fun removeProduct(product: Product): Cart {
         val newCart = this.copy(
             items = this.items -  product)
-        return newCart.copy(total = newCart.calculateTotal())
+        return newCart.copy(total = newCart.calculateTotal(newCart.items))
     }
 
     fun setDiscounts(discounts: List<Discount?>): Cart {
@@ -29,11 +29,15 @@ data class Cart(
         return items.filter { it.code == code }
     }
 
-    private fun calculateTotal(): Double {
-        var total = items.sumOf { it.price }
+    fun getTotalOfProduct(code: String): Double {
+        return calculateTotal(items.filter { it.code == code })
+    }
+
+    private fun calculateTotal(productList: List<Product>): Double {
+        var total = productList.sumOf { it.price }
 
         for (discount in discounts) {
-            total -= discount?.applyDiscount(items) ?: 0.0
+            total -= discount?.applyDiscount(productList) ?: 0.0
         }
         return total
     }
