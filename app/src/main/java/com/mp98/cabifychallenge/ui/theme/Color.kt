@@ -11,3 +11,4 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val CabifyPurple80 = Color(0xFF6D3FAA)
+val CabifyPurpleGray80 = Color(0xFF8055B9)

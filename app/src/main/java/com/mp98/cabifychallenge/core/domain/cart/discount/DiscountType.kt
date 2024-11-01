@@ -7,7 +7,7 @@ sealed class DiscountType {
         fun fromDiscount(product: Product): Discount? {
             return when (product.discount) {
                 "2X1" -> TwoForOneDiscount(product)
-                "VOUCHER" -> BulkDiscount(product)
+                "BULK" -> BulkDiscount(product)
                 else -> null
             }
         }

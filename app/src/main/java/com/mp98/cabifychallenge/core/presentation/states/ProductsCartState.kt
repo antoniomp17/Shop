@@ -6,7 +6,7 @@ import com.mp98.cabifychallenge.core.domain.model.Product
 data class ProductsCartState(
 
     val products: List<Product> = emptyList(),
-    val cart: Cart = Cart(emptyList()),
+    val cart: Cart = Cart(discounts = emptyList()),
     val total: Double = 0.0
 
 )

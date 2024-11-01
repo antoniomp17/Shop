@@ -30,20 +30,28 @@ class ProductCartViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val products = getProductsUseCase()
-                _productsCartState.update { state -> state.copy(products = products) }
-                applyDiscounts(products)
+                _productsCartState.update {
+                    state -> state.copy(products = products)
+                }
+
+                modifyDiscountsForCabifyChallenge()
+
+                applyDiscounts()
+
             } catch (e: Exception) {
-                // Manejar el error en el estado
+                //TODO: Manejar el error en el estado
                 //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
             }
         }
     }
 
-    private fun applyDiscounts(products: List<Product>) {
-        val discounts = products.filter { it.discount != null }.map {
+    private fun applyDiscounts() {
+        val discounts =  productsCartState.value.products.filter { it.discount != null }.map {
             DiscountType.fromDiscount(it)
         }
-        _productsCartState.update { state -> state.copy(cart = Cart(discounts)) }
+        _productsCartState.update { state ->
+            state.copy(cart = state.cart.setDiscounts(discounts))
+        }
     }
 
     fun addProductToCart(product: Product) {
@@ -53,7 +61,35 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    fun getTotal(): Double {
-        return _productsCartState.value.cart.calculateTotal()
+    fun removeProductToCart(product: Product) {
+        _productsCartState.update { state ->
+            val updatedCart = state.cart.removeProduct(product)
+            state.copy(cart = updatedCart)
+        }
+    }
+
+    private fun modifyDiscountsForCabifyChallenge(){
+
+        val productsWithDiscount = productsCartState.value.products.map { product ->
+            when (product.code) {
+                "VOUCHER" -> {
+                    product.copy(discount = "2X1")
+                }
+                "TSHIRT" -> {
+                    product.copy(
+                        discount = "BULK",
+                        discountPrice = 19.0,
+                        minQuantity = 3
+                    )
+                }
+                else -> {
+                    product
+                }
+            }
+        }
+
+        _productsCartState.update { state ->
+            state.copy(products = productsWithDiscount)
+        }
     }
 }
