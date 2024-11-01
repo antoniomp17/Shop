@@ -17,13 +17,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.mp98.cabifychallenge.R
+import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.presentation.models.ProductImage
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
@@ -70,11 +69,7 @@ fun ProductItem(
                     verticalAlignment = Alignment.Top){
 
                     Text(
-                        text = when(product.discount){
-                            "2X1" -> stringResource(R.string.discount2x1)
-                            "BULK" -> stringResource(R.string.discountBulk)
-                            else -> ""
-                        },
+                        text = DiscountType.getDiscountString(product.discount),
                         textAlign = TextAlign.Center,
                         fontSize = scalableText(14.sp),
                         modifier = Modifier.weight(1f),

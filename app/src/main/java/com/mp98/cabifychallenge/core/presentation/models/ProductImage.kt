@@ -1,5 +1,7 @@
 package com.mp98.cabifychallenge.core.presentation.models
 
+import com.mp98.cabifychallenge.core.domain.model.Product
+
 sealed class ProductImage(val imageUrl: String) {
     data object TShirt : ProductImage("https://i.ibb.co/hX5QD3s/camiseta-cabify.png")
     data object Voucher : ProductImage("https://i.ibb.co/TkrwWjc/voucher-cabify.png")
@@ -8,9 +10,9 @@ sealed class ProductImage(val imageUrl: String) {
     companion object {
         fun fromId(id: String): ProductImage? {
             return when (id) {
-                "TSHIRT" -> TShirt
-                "VOUCHER" -> Voucher
-                "MUG" -> Mug
+                Product.T_SHIRT -> TShirt
+                Product.VOUCHER -> Voucher
+                Product.MUG -> Mug
                 else -> null
             }
         }

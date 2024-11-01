@@ -28,9 +28,10 @@ fun ProductList(productCartViewModel: ProductCartViewModel){
                     product =  it,
                     productCartViewModel = productCartViewModel
                 ){
-
+                    productCartViewModel.changeShowDiscountDialog(it.discount)
                 }
             }
         }
     )
+    DiscountDialog(state, productCartViewModel)
 }

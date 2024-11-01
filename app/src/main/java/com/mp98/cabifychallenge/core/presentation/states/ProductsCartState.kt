@@ -7,6 +7,8 @@ data class ProductsCartState(
 
     val products: List<Product> = emptyList(),
     val cart: Cart = Cart(discounts = emptyList()),
-    val total: Double = 0.0
+    val total: Double = 0.0,
+
+    val showDiscountDialog: String? = null
 
 )

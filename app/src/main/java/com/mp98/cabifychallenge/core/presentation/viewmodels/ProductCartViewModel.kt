@@ -2,7 +2,6 @@ package com.mp98.cabifychallenge.core.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mp98.cabifychallenge.core.domain.cart.Cart
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.domain.usecases.GetProductsUseCase
@@ -72,16 +71,21 @@ class ProductCartViewModel @Inject constructor(
         return productsCartState.value.cart.getProductsOfCode(code)
     }
 
+    fun changeShowDiscountDialog(discountType: String?){
+        _productsCartState.update { state ->
+            state.copy(showDiscountDialog = discountType)
+        }
+    }
 
     private fun modifyDiscountsForCabifyChallenge(){
         val productsWithDiscount = productsCartState.value.products.map { product ->
             when (product.code) {
-                "VOUCHER" -> {
-                    product.copy(discount = "2X1")
+                Product.VOUCHER-> {
+                    product.copy(discount = DiscountType.TWO_FOR_ONE_DISCOUNT)
                 }
-                "TSHIRT" -> {
+                Product.T_SHIRT -> {
                     product.copy(
-                        discount = "BULK",
+                        discount = DiscountType.BULK_DISCOUNT,
                         discountPrice = 19.0,
                         minQuantity = 3
                     )
