@@ -1,26 +1,36 @@
 package com.mp98.cabifychallenge.core.presentation.screens.productlist.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.mp98.cabifychallenge.R
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.presentation.models.ProductImage
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
+import com.mp98.cabifychallenge.ui.theme.primaryColor
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -37,16 +47,54 @@ fun ProductItem(
         shape = ShapeDefaults.Large,
         onClick = {
             onSelectProduct()
-        }
+        },
+        border = if(product.discount != null) {
+            BorderStroke(2.dp, primaryColor)
+        } else null,
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp
+        )
     ){
-        Column (modifier = Modifier.fillMaxWidth(),
+        Column (modifier = Modifier
+            .fillMaxWidth()
+            .dynamicPadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center){
 
+            if(product.discount != null){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(0.5f),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.Top){
+
+                    Text(
+                        text = when(product.discount){
+                            "2X1" -> stringResource(R.string.discount2x1)
+                            "BULK" -> stringResource(R.string.discountBulk)
+                            else -> ""
+                        },
+                        textAlign = TextAlign.Center,
+                        fontSize = scalableText(14.sp),
+                        modifier = Modifier.weight(1f),
+                        color = primaryColor
+                    )
+
+                    Icon(
+                        modifier = Modifier.weight(0.25f),
+                        imageVector = Icons.Rounded.Info,
+                        contentDescription = Icons.Rounded.Info.name,
+                        tint = primaryColor
+                    )
+
+                }
+            }
+
             GlideImage(
                 modifier = Modifier
-                    .dynamicPadding()
-                    .fillMaxSize(fraction = 0.4f),
+                    .fillMaxSize(fraction = 0.4f)
+                    .weight(1f),
                 model = ProductImage.fromId(product.code)?.imageUrl,
                 contentDescription = product.name
             )
@@ -56,7 +104,7 @@ fun ProductItem(
                 textAlign = TextAlign.Center,
                 fontSize = scalableText(16.sp),
                 modifier = Modifier
-                    .dynamicPadding()
+                    .weight(0.25f)
             )
 
             Text(
@@ -64,12 +112,14 @@ fun ProductItem(
                 textAlign = TextAlign.Center,
                 fontSize = scalableText(18.sp),
                 modifier = Modifier
-                    .dynamicPadding()
+                    .weight(0.25f)
             )
 
             ItemButton(
                 product = product,
-                productCartViewModel = productCartViewModel
+                productCartViewModel = productCartViewModel,
+                modifier = Modifier
+                    .weight(1f)
             )
         }
     }

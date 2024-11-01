@@ -19,13 +19,15 @@ import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
 
 @Composable
-fun AddButton(product: Product, productCartViewModel: ProductCartViewModel){
+fun AddButton(product: Product,
+              productCartViewModel: ProductCartViewModel,
+              modifier: Modifier = Modifier){
     Button(
         onClick = {
             productCartViewModel.addProductToCart(product)
         },
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier
+        modifier = modifier
             .dynamicPadding()
             .aspectRatio(3f)
             .fillMaxWidth(fraction = 0.75f)

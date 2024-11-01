@@ -1,13 +1,13 @@
 package com.mp98.cabifychallenge.core.presentation.screens.customscaffold
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 
 @Composable
@@ -18,10 +18,10 @@ fun CustomScaffold(
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { TopBar(productCartViewModel = productCartViewModel) },
+        topBar = { TopBar(productCartViewModel = productCartViewModel) }
     ){ padding ->
         Column(modifier = Modifier
-            .padding(padding)) {
+            .padding(padding).fillMaxSize()) {
             HorizontalDivider(
                 thickness = 0.5.dp
             )

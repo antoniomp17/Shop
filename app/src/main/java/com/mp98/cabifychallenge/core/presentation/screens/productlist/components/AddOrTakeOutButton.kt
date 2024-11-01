@@ -36,13 +36,14 @@ import com.mp98.cabifychallenge.ui.theme.secondaryColor
 fun AddOrRemoveButton(
     product: Product,
     productCartViewModel: ProductCartViewModel,
-    state: ProductsCartState
+    state: ProductsCartState,
+    modifier: Modifier
 ){
 
     Row(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
+        modifier = modifier
             .dynamicPadding()
             .aspectRatio(3f)
             .fillMaxWidth(fraction = 0.75f)
