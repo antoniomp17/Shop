@@ -8,11 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.BarChart
-import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.ShoppingBag
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
@@ -30,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.components.TopBar
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.core.utils.dynamicPadding
