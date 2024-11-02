@@ -1,10 +1,5 @@
 package com.mp98.cabifychallenge.core.domain.model
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import com.mp98.cabifychallenge.R
-import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
-
 data class Product(
     val code: String,
     val name: String,

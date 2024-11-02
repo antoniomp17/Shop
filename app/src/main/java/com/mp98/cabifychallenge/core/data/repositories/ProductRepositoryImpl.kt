@@ -10,6 +10,7 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(
     private val productService: ProductService
 ) : ProductRepository {
+
     override suspend fun getProducts(): List<Product> {
         val productList = productService.getProducts().products.map { it.toDomain() }
         return modifyDiscountsForCabifyChallenge(productList)

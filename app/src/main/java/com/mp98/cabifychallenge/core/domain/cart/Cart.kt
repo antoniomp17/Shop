@@ -9,15 +9,8 @@ data class Cart(
     val total: Double = 0.0
 ) {
 
-    fun addProduct(product: Product): Cart {
-        val newCart = this.copy(
-            items = this.items + product)
-        return newCart.copy(total = newCart.calculateTotal(newCart.items))
-    }
-
-    fun removeProduct(product: Product): Cart {
-        val newCart = this.copy(
-            items = this.items -  product)
+    fun setItems(items: List<Product>): Cart {
+        val newCart = this.copy(items = items)
         return newCart.copy(total = newCart.calculateTotal(newCart.items))
     }
 

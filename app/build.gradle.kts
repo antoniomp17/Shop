@@ -60,7 +60,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    // Hilt para Inyección de dependencias
+    // Hilt
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.androidx.hilt.compiler)
     implementation(libs.dagger.hilt)
@@ -75,4 +75,8 @@ dependencies {
 
     // Icons Extended
     implementation(libs.androidx.material.icons.extended)
+
+    // Room
+    implementation(libs.androidx.room)
+    ksp(libs.androidx.room.compiler)
 }

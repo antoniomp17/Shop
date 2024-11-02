@@ -7,12 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
+import com.mp98.cabifychallenge.core.domain.usecases.GetAllCartProductsUseCase
 import com.mp98.cabifychallenge.core.domain.usecases.GetProductsUseCase
+import com.mp98.cabifychallenge.core.domain.usecases.RemoveCartProductUseCase
+import com.mp98.cabifychallenge.core.domain.usecases.SetCartProductUseCase
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.states.ProductsCartState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -20,7 +24,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductCartViewModel @Inject constructor(
-    private val getProductsUseCase: GetProductsUseCase
+    private val getProductsUseCase: GetProductsUseCase,
+    private val getAllCartProductsUseCase: GetAllCartProductsUseCase,
+    private val setCartProductUseCase: SetCartProductUseCase,
+    private val removeCartProductUseCase: RemoveCartProductUseCase,
 ) : ViewModel() {
 
     private val _productsCartState = MutableStateFlow(ProductsCartState())
@@ -30,6 +37,7 @@ class ProductCartViewModel @Inject constructor(
 
     init {
         fetchProducts()
+        fetchCartProducts()
     }
 
     private fun fetchProducts() {
@@ -52,6 +60,23 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
+    private fun fetchCartProducts() {
+        viewModelScope.launch {
+            try {
+                getAllCartProductsUseCase().collectLatest { cartProducts ->
+                    _productsCartState.update { state ->
+                        state.copy(
+                            cart = state.cart.setItems(cartProducts)
+                        )
+                    }
+                }
+            } catch (e: Exception) {
+                //TODO: Manejar el error en el estado
+                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+            }
+        }
+    }
+
     private fun applyDiscounts() {
         val discounts =  productsCartState.value.products.filter { it.discount != null }.map {
             DiscountType.fromDiscount(it)
@@ -62,16 +87,24 @@ class ProductCartViewModel @Inject constructor(
     }
 
     fun addProductToCart(product: Product) {
-        _productsCartState.update { state ->
-            val updatedCart = state.cart.addProduct(product)
-            state.copy(cart = updatedCart)
+        viewModelScope.launch {
+            try {
+                setCartProductUseCase(product)
+            } catch (e: Exception) {
+                //TODO: Manejar el error en el estado
+                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+            }
         }
     }
 
     fun removeProductToCart(product: Product) {
-        _productsCartState.update { state ->
-            val updatedCart = state.cart.removeProduct(product)
-            state.copy(cart = updatedCart)
+        viewModelScope.launch {
+            try {
+                removeCartProductUseCase(product.code)
+            } catch (e: Exception) {
+                //TODO: Manejar el error en el estado
+                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+            }
         }
     }
 
@@ -134,5 +167,4 @@ class ProductCartViewModel @Inject constructor(
             state.copy(screen = screen)
         }
     }
-
 }

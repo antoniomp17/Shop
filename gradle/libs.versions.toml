@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.1"
+agp = "8.7.2"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -14,6 +14,7 @@ ksp = "2.0.0-1.0.22"
 retrofit = "2.11.0"
 glide = "1.0.0-beta01"
 swiperefreshlayout = "1.1.0"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,10 @@ glide = { module = "com.github.bumptech.glide:compose", version.ref="glide" }
 #Icons Extended
 androidx-material-icons-extended = {  group = "androidx.compose.material", name = "material-icons-extended"}
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+#Room
+# Hilt Navigation
+androidx-room = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 
 [plugins]
