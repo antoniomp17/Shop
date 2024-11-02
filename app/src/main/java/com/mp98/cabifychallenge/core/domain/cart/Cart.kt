@@ -2,6 +2,7 @@ package com.mp98.cabifychallenge.core.domain.cart
 
 import com.mp98.cabifychallenge.core.domain.cart.discount.Discount
 import com.mp98.cabifychallenge.core.domain.model.Product
+import com.mp98.cabifychallenge.core.domain.model.ProductCart
 
 data class Cart(
     private val discounts: List<Discount?>,
@@ -9,13 +10,21 @@ data class Cart(
     val total: Double = 0.0
 ) {
 
-    fun setItems(items: List<Product>): Cart {
-        val newCart = this.copy(items = items)
+    fun setItems(productsCart: List<ProductCart>, availableProducts: List<Product>): Cart {
+        val productCountMap = productsCart.groupingBy { it.code }.eachCount()
+
+        val newItems = availableProducts.filter { productCountMap.containsKey(it.code) }
+            .flatMap { product ->
+                List(productCountMap[product.code] ?: 0) { product }
+            }
+
+        val newCart = this.copy(items = newItems)
         return newCart.copy(total = newCart.calculateTotal(newCart.items))
     }
 
     fun setDiscounts(discounts: List<Discount?>): Cart {
-        return this.copy(discounts = discounts)
+        val newCart = this.copy(discounts = discounts)
+        return newCart.copy(total = newCart.calculateTotal(newCart.items))
     }
 
     fun getProductsOfCode(code: String): List<Product> {

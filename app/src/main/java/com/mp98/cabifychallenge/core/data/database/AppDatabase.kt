@@ -2,12 +2,12 @@ package com.mp98.cabifychallenge.core.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.mp98.cabifychallenge.core.data.model.ProductEntity
+import com.mp98.cabifychallenge.core.data.model.ProductCartEntity
 
 @Database(
     entities =
     [
-        ProductEntity::class,
+        ProductCartEntity::class,
     ],
     version = 1
 )

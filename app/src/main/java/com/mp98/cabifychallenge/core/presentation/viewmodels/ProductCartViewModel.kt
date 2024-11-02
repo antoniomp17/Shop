@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
+import com.mp98.cabifychallenge.core.domain.model.ProductCart
 import com.mp98.cabifychallenge.core.domain.usecases.GetAllCartProductsUseCase
 import com.mp98.cabifychallenge.core.domain.usecases.GetProductsUseCase
 import com.mp98.cabifychallenge.core.domain.usecases.RemoveCartProductUseCase
@@ -37,7 +38,6 @@ class ProductCartViewModel @Inject constructor(
 
     init {
         fetchProducts()
-        fetchCartProducts()
     }
 
     private fun fetchProducts() {
@@ -52,6 +52,7 @@ class ProductCartViewModel @Inject constructor(
                 }
 
                 applyDiscounts()
+                fetchCartProducts()
 
             } catch (e: Exception) {
                 //TODO: Manejar el error en el estado
@@ -64,10 +65,12 @@ class ProductCartViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 getAllCartProductsUseCase().collectLatest { cartProducts ->
-                    _productsCartState.update { state ->
-                        state.copy(
-                            cart = state.cart.setItems(cartProducts)
-                        )
+                    if(_productsCartState.value.products.isNotEmpty()){
+                        _productsCartState.update { state ->
+                            state.copy(
+                                cart = state.cart.setItems(cartProducts, state.products)
+                            )
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -89,7 +92,7 @@ class ProductCartViewModel @Inject constructor(
     fun addProductToCart(product: Product) {
         viewModelScope.launch {
             try {
-                setCartProductUseCase(product)
+                setCartProductUseCase(ProductCart(code = product.code))
             } catch (e: Exception) {
                 //TODO: Manejar el error en el estado
                 //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
