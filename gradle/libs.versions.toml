@@ -15,6 +15,9 @@ retrofit = "2.11.0"
 glide = "1.0.0-beta01"
 swiperefreshlayout = "1.1.0"
 room = "2.6.1"
+mockito-core = "5.7.0"
+mockito = "5.2.0"
+kotlin-coroutines-test = "1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,9 +50,14 @@ glide = { module = "com.github.bumptech.glide:compose", version.ref="glide" }
 androidx-material-icons-extended = {  group = "androidx.compose.material", name = "material-icons-extended"}
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 #Room
-# Hilt Navigation
 androidx-room = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+#Mockito
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito-core" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
+#Coroutines
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutines-test" }
 
 
 [plugins]

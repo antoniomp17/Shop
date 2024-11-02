@@ -79,4 +79,12 @@ dependencies {
     // Room
     implementation(libs.androidx.room)
     ksp(libs.androidx.room.compiler)
+
+    // Mockito
+    implementation(libs.mockito.kotlin)
+    implementation(libs.mockito.inline)
+    implementation(libs.mockito.core)
+
+    // Coroutines Test
+    implementation(libs.kotlinx.coroutines.test)
 }
