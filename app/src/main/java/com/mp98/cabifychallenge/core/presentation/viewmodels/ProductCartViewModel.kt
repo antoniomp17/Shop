@@ -107,6 +107,10 @@ class ProductCartViewModel @Inject constructor(
         return productsCartState.value.cart.getTotalOfProduct(code)
     }
 
+    fun getTotalWithDiscount(): Double {
+        return productsCartState.value.cart.calculateTotalWithDiscount()
+    }
+
     fun onVoiceSearchResult(text: String) {
         onSearchTextChanged(text)
         searchProducts()

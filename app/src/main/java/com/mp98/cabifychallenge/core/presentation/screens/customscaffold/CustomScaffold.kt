@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ShoppingBag
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.components.BottomBar
 import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.components.TopBar
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
@@ -48,18 +50,7 @@ fun CustomScaffold(
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            BottomAppBar{
-                Row (modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically){
-                    Text(
-                        text = "TOTAL: ${state.cart.total.toCurrencyFormat()}",
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = scalableText(18.sp)
-                    )
-                }
-            }
+            BottomBar(productCartViewModel = productCartViewModel)
         },
         topBar = {
             TopBar(productCartViewModel = productCartViewModel){
@@ -77,7 +68,7 @@ fun CustomScaffold(
                             productCartViewModel.changeScreen(NavigationRoute.ProductListScreen)
                             onChangeToProducts()
                         },
-                        modifier = Modifier.align(Alignment.BottomEnd).offset(y = 60.dp)
+                        modifier = Modifier.align(Alignment.BottomCenter).offset(y = 60.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.ShoppingBag,
@@ -87,7 +78,8 @@ fun CustomScaffold(
                     }
                 }
             }
-        }
+        },
+        floatingActionButtonPosition = FabPosition.Center
     ){ padding ->
         Column(modifier = Modifier
             .padding(padding).fillMaxSize()) {
