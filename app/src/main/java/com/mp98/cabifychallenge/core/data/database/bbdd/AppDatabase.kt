@@ -1,8 +1,8 @@
-package com.mp98.cabifychallenge.core.data.database
+package com.mp98.cabifychallenge.core.data.database.bbdd
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.mp98.cabifychallenge.core.data.model.ProductCartEntity
+import com.mp98.cabifychallenge.core.data.database.model.ProductCartEntity
 
 @Database(
     entities =

@@ -1,7 +1,8 @@
-package com.mp98.cabifychallenge.core.data.repositories
+package com.mp98.cabifychallenge.core.data.api.repositories
 
-import com.mp98.cabifychallenge.core.data.api.ProductService
-import com.mp98.cabifychallenge.core.data.mapper.toDomain
+import com.mp98.cabifychallenge.core.data.api.mapper.toDomain
+import com.mp98.cabifychallenge.core.data.api.service.ProductService
+import com.mp98.cabifychallenge.core.data.database.mapper.toDomain
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
 import com.mp98.cabifychallenge.core.domain.model.Product
 import com.mp98.cabifychallenge.core.domain.repositories.ProductRepository

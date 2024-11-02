@@ -1,5 +1,7 @@
 package com.mp98.cabifychallenge.core.presentation.screens.customscaffold
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.components.BottomBar
 import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.components.TopBar
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
+import com.mp98.cabifychallenge.core.presentation.states.ProductsCartState
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
@@ -46,6 +50,11 @@ fun CustomScaffold(
 ) {
 
     val state by productCartViewModel.productsCartState.collectAsState()
+
+    BackPressHandler(state = state){
+        productCartViewModel.changeScreen(NavigationRoute.ProductListScreen)
+        onChangeToProducts()
+    }
 
     Scaffold(
         modifier = modifier,
@@ -87,6 +96,24 @@ fun CustomScaffold(
                 thickness = 0.5.dp
             )
             content()
+        }
+    }
+}
+
+@Composable
+fun BackPressHandler(
+    state: ProductsCartState,
+    onChangeToProducts: () -> Unit
+){
+
+    val context = LocalContext.current
+    if(state.screen == NavigationRoute.CartListScreen){
+        BackHandler(enabled = true) {
+            onChangeToProducts()
+        }
+    } else {
+        BackHandler(enabled = true) {
+            (context as? Activity)?.finish()
         }
     }
 }

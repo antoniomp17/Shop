@@ -1,6 +1,6 @@
-package com.mp98.cabifychallenge.core.data.api
+package com.mp98.cabifychallenge.core.data.api.service
 
-import com.mp98.cabifychallenge.core.data.model.ProductEntity
+import com.mp98.cabifychallenge.core.data.api.model.ProductEntity
 import retrofit2.http.GET
 
 data class ProductResponse(

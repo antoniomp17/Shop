@@ -1,6 +1,6 @@
-package com.mp98.cabifychallenge.core.data.mapper
+package com.mp98.cabifychallenge.core.data.api.mapper
 
-import com.mp98.cabifychallenge.core.data.model.ProductEntity
+import com.mp98.cabifychallenge.core.data.api.model.ProductEntity
 import com.mp98.cabifychallenge.core.domain.model.Product
 
 fun ProductEntity.toDomain(): Product {

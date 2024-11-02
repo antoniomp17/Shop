@@ -1,7 +1,7 @@
-package com.mp98.cabifychallenge.core.data.di
+package com.mp98.cabifychallenge.core.data.database.di
 
-import com.mp98.cabifychallenge.core.data.database.AppDao
-import com.mp98.cabifychallenge.core.data.repositories.CartRepositoryImpl
+import com.mp98.cabifychallenge.core.data.database.bbdd.AppDao
+import com.mp98.cabifychallenge.core.data.database.repositories.CartRepositoryImpl
 import com.mp98.cabifychallenge.core.domain.repositories.CartRepository
 import com.mp98.cabifychallenge.core.domain.usecases.GetAllCartProductsUseCase
 import com.mp98.cabifychallenge.core.domain.usecases.RemoveCartProductUseCase

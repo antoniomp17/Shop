@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">CabifyChallenge</string>
+
+    <string name="search">Buscar…</string>
+
+    <string name="euroSymbol">€</string>
+
+    <string name="add_item">Añadir</string>
+
+    <string name="discount2x1">Descuento 2x1</string>
+
+    <string name="discountBulk">Descuento por cantidad</string>
+
+    <string name="discount2x1Description">
+        <![CDATA[
+                ¡Aprovecha la promoción 2x1! Compra dos unidades y una te sale gratis."
+            ]]>
+    </string>
+
+    <string name="discountBulkDescription">
+        <![CDATA[
+        ¡Descuento por cantidad! Al comprar 3 o más unidades, el precio por unidad se reduce
+        automáticamente. Ideal para aprovechar en grandes cantidades.
+            ]]>
+    </string>
+
+    <string name="antes">ANTES:</string>
+
+    <string name="total">TOTAL:</string>
+
+    <string name="cart">CARRITO</string>
+
+</resources>

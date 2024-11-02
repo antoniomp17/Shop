@@ -1,4 +1,4 @@
-package com.mp98.cabifychallenge.core.data.model
+package com.mp98.cabifychallenge.core.data.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

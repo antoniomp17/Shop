@@ -1,9 +1,9 @@
-package com.mp98.cabifychallenge.core.data.database
+package com.mp98.cabifychallenge.core.data.database.bbdd
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.mp98.cabifychallenge.core.data.model.ProductCartEntity
+import com.mp98.cabifychallenge.core.data.database.model.ProductCartEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

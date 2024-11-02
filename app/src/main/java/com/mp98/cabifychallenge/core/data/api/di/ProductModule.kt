@@ -1,6 +1,6 @@
-package com.mp98.cabifychallenge.core.data.di
+package com.mp98.cabifychallenge.core.data.api.di
 
-import com.mp98.cabifychallenge.core.data.repositories.ProductRepositoryImpl
+import com.mp98.cabifychallenge.core.data.api.repositories.ProductRepositoryImpl
 import com.mp98.cabifychallenge.core.domain.repositories.ProductRepository
 import com.mp98.cabifychallenge.core.domain.usecases.GetProductsUseCase
 import dagger.Module
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object ProductModule {
 
     @Provides
     @Singleton

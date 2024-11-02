@@ -1,8 +1,8 @@
-package com.mp98.cabifychallenge.core.data.repositories
+package com.mp98.cabifychallenge.core.data.database.repositories
 
-import com.mp98.cabifychallenge.core.data.database.AppDao
-import com.mp98.cabifychallenge.core.data.mapper.toDomain
-import com.mp98.cabifychallenge.core.data.mapper.toEntity
+import com.mp98.cabifychallenge.core.data.database.bbdd.AppDao
+import com.mp98.cabifychallenge.core.data.database.mapper.toDomain
+import com.mp98.cabifychallenge.core.data.database.mapper.toEntity
 import com.mp98.cabifychallenge.core.domain.model.ProductCart
 import com.mp98.cabifychallenge.core.domain.repositories.CartRepository
 import kotlinx.coroutines.flow.Flow

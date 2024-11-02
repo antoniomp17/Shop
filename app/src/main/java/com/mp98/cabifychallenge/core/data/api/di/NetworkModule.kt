@@ -1,6 +1,6 @@
-package com.mp98.cabifychallenge.core.data.di
+package com.mp98.cabifychallenge.core.data.api.di
 
-import com.mp98.cabifychallenge.core.data.api.ProductService
+import com.mp98.cabifychallenge.core.data.api.service.ProductService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

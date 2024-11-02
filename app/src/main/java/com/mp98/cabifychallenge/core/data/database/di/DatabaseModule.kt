@@ -1,9 +1,9 @@
-package com.mp98.cabifychallenge.core.data.di
+package com.mp98.cabifychallenge.core.data.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.mp98.cabifychallenge.core.data.database.AppDao
-import com.mp98.cabifychallenge.core.data.database.AppDatabase
+import com.mp98.cabifychallenge.core.data.database.bbdd.AppDao
+import com.mp98.cabifychallenge.core.data.database.bbdd.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
