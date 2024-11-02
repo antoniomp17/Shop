@@ -16,7 +16,7 @@ val onSecondaryColor = Color(0xFF000000) // Texto sobre el color secundario
 val secondaryContainerColor = Color(0xFF0038E0) // Color secundario para contenedores
 val onSecondaryContainerColor = Color(0xFFFFFFFF) // Texto sobre el color secundario de contenedores
 
-val tertiaryColor = Color(0xFF69B90D) // Color terciario
+val tertiaryColor = Color(0xFF4CAF50) // Color terciario
 val onTertiaryColor = Color(0xFF000000) // Texto sobre el color terciario
 val tertiaryContainerColor = Color(0xFF69B90D) // Color terciario para contenedores
 val onTertiaryContainerColor = Color(0xFFFFFFFF) // Texto sobre el color terciario de contenedores

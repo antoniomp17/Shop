@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -22,6 +23,8 @@ import com.mp98.cabifychallenge.R
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.cabifychallenge.core.utils.scalableText
 import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
+import com.mp98.cabifychallenge.ui.theme.errorColor
+import com.mp98.cabifychallenge.ui.theme.tertiaryColor
 
 @Composable
 fun BottomBar(productCartViewModel: ProductCartViewModel){
@@ -43,7 +46,8 @@ fun BottomBar(productCartViewModel: ProductCartViewModel){
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = scalableText(16.sp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                color = errorColor
             )
 
             Text(
@@ -52,7 +56,8 @@ fun BottomBar(productCartViewModel: ProductCartViewModel){
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
                 fontSize = scalableText(16.sp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                color = tertiaryColor
             )
         }
     }

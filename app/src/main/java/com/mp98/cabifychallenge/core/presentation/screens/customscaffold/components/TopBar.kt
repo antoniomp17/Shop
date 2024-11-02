@@ -33,7 +33,7 @@ fun TopBar(
                 SearchBar(productCartViewModel = productCartViewModel)
             } else {
                 Text(
-                    text = stringResource(R.string.cart),
+                    text = stringResource(R.string.your_purchase),
                     fontSize = scalableText(18.sp),
                     fontWeight = FontWeight.Bold,
                     color = primaryColor

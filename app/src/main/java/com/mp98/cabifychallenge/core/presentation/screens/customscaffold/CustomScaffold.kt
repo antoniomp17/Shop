@@ -59,7 +59,9 @@ fun CustomScaffold(
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            BottomBar(productCartViewModel = productCartViewModel)
+            if (state.screen == NavigationRoute.CartListScreen){
+                BottomBar(productCartViewModel = productCartViewModel)
+            }
         },
         topBar = {
             TopBar(productCartViewModel = productCartViewModel){
