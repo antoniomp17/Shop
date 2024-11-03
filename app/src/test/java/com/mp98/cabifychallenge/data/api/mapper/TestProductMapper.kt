@@ -9,10 +9,10 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 
-class ConsumeInfoMapperTest {
+class TestProductMapper {
 
     @Test
-    fun `test mapping from ConsumeInfoEntity to ConsumeInfo`() {
+    fun `test mapping from ProductEntity to Product`() {
         val entity = ProductEntity(
             code = "VOUCHER",
             name = "Test Product",
@@ -32,7 +32,7 @@ class ConsumeInfoMapperTest {
     }
 
     @Test
-    fun `test mapping from ConsumeInfo to ConsumeInfoEntity`() {
+    fun `test mapping from Product to ProductEntity`() {
         val entity = Product(
             code = "VOUCHER",
             name = "Test Product",
