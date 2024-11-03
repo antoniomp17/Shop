@@ -39,6 +39,10 @@ data class Cart(
         return items.sumOf { it.price }
     }
 
+    fun getCalculateTotal(productList: List<Product>): Double {
+        return calculateTotal(productList)
+    }
+
     private fun calculateTotal(productList: List<Product>): Double {
         var total = productList.sumOf { it.price }
 

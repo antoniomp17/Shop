@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,6 +46,7 @@ fun ProductItem(
 ){
     Card(
         modifier = Modifier
+            .testTag("ProductCard")
             .fillMaxWidth(fraction = 0.5f)
             .aspectRatio(0.6f)
             .dynamicPadding(),
@@ -68,6 +70,7 @@ fun ProductItem(
             if(product.discount != null){
                 Row(
                     modifier = Modifier
+                        .testTag("DiscountableProduct")
                         .fillMaxWidth()
                         .weight(0.5f),
                     horizontalArrangement = Arrangement.Center,

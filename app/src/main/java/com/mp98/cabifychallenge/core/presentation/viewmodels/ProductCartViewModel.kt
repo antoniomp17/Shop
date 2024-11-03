@@ -40,7 +40,7 @@ class ProductCartViewModel @Inject constructor(
         fetchProducts()
     }
 
-    private fun fetchProducts() {
+    fun fetchProducts() {
         viewModelScope.launch {
             try {
                 val products = getProductsUseCase()
@@ -61,7 +61,7 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    private fun fetchCartProducts() {
+    fun fetchCartProducts() {
         viewModelScope.launch {
             try {
                 getAllCartProductsUseCase().collectLatest { cartProducts ->

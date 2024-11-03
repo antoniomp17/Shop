@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mp98.cabifychallenge.core.presentation.screens.productlist.components.ProductItem
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
@@ -18,6 +20,7 @@ fun ProductList(productCartViewModel: ProductCartViewModel){
 
     val gridState = rememberLazyGridState()
     LazyVerticalGrid(
+        modifier = Modifier.testTag("ProductGrid"),
         columns = GridCells.Fixed(2),
         state = gridState,
         content = {

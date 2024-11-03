@@ -1,12 +1,12 @@
 package com.mp98.cabifychallenge.core.presentation.screens.productlist
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
@@ -20,7 +20,9 @@ fun DiscountDialog(state: ProductsCartState, productCartViewModel: ProductCartVi
 
     if(!state.showDiscountDialog.isNullOrEmpty()){
         AlertDialog(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag("DiscountDialog")
+                .fillMaxWidth(),
             onDismissRequest = {
                 productCartViewModel.changeShowDiscountDialog("")
             },
