@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testInitialScreenDisplay()">
+      <SelectionState runConfigName="ItemButtonTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testProductsDisplayedInGrid()">
+      <SelectionState runConfigName="AddButtonTest (1)">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ProductListTest">
+      <SelectionState runConfigName="ProductItemTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="DiscountDialogTest">
+      <SelectionState runConfigName="productItem_showsAddButtonWhenProductNotInCart()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ProductListScreenTest">
+      <SelectionState runConfigName="productItem_showsAddOrTakeOutButtonWhenProductInCart()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

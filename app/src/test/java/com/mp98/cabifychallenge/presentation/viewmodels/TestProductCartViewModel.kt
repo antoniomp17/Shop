@@ -13,10 +13,8 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import kotlinx.coroutines.flow.flow
 import org.junit.After
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.mock
@@ -83,7 +81,7 @@ class TestProductCartViewModel {
     fun `removeProductToCart calls removeCartProductUseCase`() = runTest {
         val product = Product("1", "T-Shirt", 20.0, null)
 
-        viewModel.removeProductToCart(product)
+        viewModel.removeProductFromCart(product)
         testDispatcher.scheduler.advanceUntilIdle()
 
         verify(removeCartProductUseCase).invoke(product.code)

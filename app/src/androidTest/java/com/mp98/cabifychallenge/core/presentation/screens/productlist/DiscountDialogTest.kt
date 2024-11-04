@@ -1,4 +1,4 @@
-package com.mp98.cabifychallenge.core.presentation.screens
+package com.mp98.cabifychallenge.core.presentation.screens.productlist
 
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
@@ -11,7 +11,6 @@ import androidx.test.filters.LargeTest
 import com.mp98.cabifychallenge.MainActivity
 import com.mp98.cabifychallenge.R
 import com.mp98.cabifychallenge.core.domain.cart.discount.DiscountType
-import com.mp98.cabifychallenge.core.presentation.screens.productlist.DiscountDialog
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -63,26 +62,20 @@ class DiscountDialogTest {
 
     @Test
     fun discountDialog_DisplaysCorrectlyForBulkDiscount() {
-        // Simulate setting the discount type to "BULK" in the ViewModel
         viewModel.changeShowDiscountDialog(DiscountType.BULK_DISCOUNT)
-
 
         composeTestRule.waitForIdle()
 
-        // Check if the dialog is displayed
         composeTestRule.onNodeWithTag("DiscountDialog").assertIsDisplayed()
 
-        // Verify the title and description for the BULK discount
         composeTestRule.onNodeWithText(
             composeTestRule.activity.getString(R.string.discountBulk)).assertIsDisplayed()
         composeTestRule.onNodeWithText(
             composeTestRule.activity.getString(R.string.discountBulk)).assertIsDisplayed()
 
-        // Close the dialog
         composeTestRule.onNodeWithText(
             composeTestRule.activity.getString(R.string.accept)).performClick()
 
-        // Verify the dialog is no longer displayed
         composeTestRule.onNodeWithTag("DiscountDialog").assertDoesNotExist()
     }
 }

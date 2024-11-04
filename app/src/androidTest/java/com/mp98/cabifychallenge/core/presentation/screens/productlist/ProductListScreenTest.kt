@@ -1,4 +1,4 @@
-package com.mp98.cabifychallenge.core.presentation.screens
+package com.mp98.cabifychallenge.core.presentation.screens.productlist
 
 import androidx.activity.compose.setContent
 import androidx.compose.ui.test.assertIsDisplayed
@@ -12,10 +12,12 @@ import androidx.compose.ui.test.performScrollToIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.test.filters.LargeTest
 import com.mp98.cabifychallenge.MainActivity
-import com.mp98.cabifychallenge.core.presentation.screens.productlist.ProductList
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.resetMain
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

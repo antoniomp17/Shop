@@ -88,7 +88,7 @@ private fun TakeOutButton(
 ){
     IconButton(
         onClick = {
-            productCartViewModel.removeProductToCart(product)
+            productCartViewModel.removeProductFromCart(product)
         },
         colors = IconButtonColors(
             containerColor = Color.Transparent,

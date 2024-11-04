@@ -61,7 +61,7 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    fun fetchCartProducts() {
+    private fun fetchCartProducts() {
         viewModelScope.launch {
             try {
                 getAllCartProductsUseCase().collectLatest { cartProducts ->
@@ -100,7 +100,7 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    fun removeProductToCart(product: Product) {
+    fun removeProductFromCart(product: Product) {
         viewModelScope.launch {
             try {
                 removeCartProductUseCase(product.code)

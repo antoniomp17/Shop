@@ -70,7 +70,6 @@ fun ProductItem(
             if(product.discount != null){
                 Row(
                     modifier = Modifier
-                        .testTag("DiscountableProduct")
                         .fillMaxWidth()
                         .weight(0.5f),
                     horizontalArrangement = Arrangement.Center,
@@ -80,7 +79,8 @@ fun ProductItem(
                         text = DiscountType.getDiscountString(product.discount),
                         textAlign = TextAlign.Center,
                         fontSize = scalableText(14.sp),
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f)
+                            .testTag("DiscountableProduct"),
                         color = primaryColor
                     )
 
@@ -124,8 +124,7 @@ fun ProductItem(
             ItemButton(
                 product = product,
                 productCartViewModel = productCartViewModel,
-                modifier = Modifier
-                    .weight(1f)
+                modifier = Modifier.weight(1f)
             )
         }
     }
