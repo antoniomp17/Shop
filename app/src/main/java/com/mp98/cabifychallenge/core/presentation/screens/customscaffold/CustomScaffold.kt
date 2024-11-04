@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -79,7 +80,9 @@ fun CustomScaffold(
                             productCartViewModel.changeScreen(NavigationRoute.ProductListScreen)
                             onChangeToProducts()
                         },
-                        modifier = Modifier.align(Alignment.BottomCenter).offset(y = 60.dp)
+                        modifier = Modifier
+                            .testTag("FloatingActionButton")
+                            .align(Alignment.BottomCenter).offset(y = 60.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.ShoppingBag,
