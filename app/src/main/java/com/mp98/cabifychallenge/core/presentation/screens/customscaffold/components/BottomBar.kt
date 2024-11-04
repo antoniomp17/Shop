@@ -10,7 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -37,7 +36,7 @@ fun BottomBar(productCartViewModel: ProductCartViewModel){
             verticalAlignment = Alignment.CenterVertically){
             Text(
                 text =  buildAnnotatedString {
-                    append(stringResource(id = R.string.antes) + " ")
+                    append(stringResource(id = R.string.before) + " ")
                     withStyle(style = SpanStyle(textDecoration = TextDecoration.LineThrough)) {
                         append(productCartViewModel.getTotalWithDiscount().toCurrencyFormat())
 

@@ -22,7 +22,7 @@ import org.junit.Test
 
 @LargeTest
 @HiltAndroidTest
-class ProductListTest {
+class ProductListScreenTest {
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
@@ -38,11 +38,11 @@ class ProductListTest {
             productCartViewModel.onSearchTextChanged("")
             ProductList(productCartViewModel = productCartViewModel)
         }
+        composeTestRule.waitForIdle()
     }
 
     @Test
     fun testProductsDisplayedInGrid() {
-        composeTestRule.waitForIdle()
         
         composeTestRule
             .onNodeWithTag("ProductGrid")

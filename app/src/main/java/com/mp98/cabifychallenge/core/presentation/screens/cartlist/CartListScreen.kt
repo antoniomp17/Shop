@@ -33,5 +33,5 @@ fun CartList(productCartViewModel: ProductCartViewModel){
             }
         }
     )
-    DiscountDialog(state, productCartViewModel)
+    DiscountDialog(productCartViewModel)
 }

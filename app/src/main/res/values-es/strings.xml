@@ -24,10 +24,12 @@
             ]]>
     </string>
 
-    <string name="antes">ANTES:</string>
+    <string name="before">ANTES:</string>
 
     <string name="total">TOTAL:</string>
 
     <string name="your_purchase">TU COMPRA</string>
+
+    <string name="accept">ACEPTAR</string>
 
 </resources>
