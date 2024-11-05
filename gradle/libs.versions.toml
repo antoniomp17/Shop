@@ -21,7 +21,6 @@ kotlin-coroutines-test = "1.7.3"
 runner = "1.6.2"
 androidxTestCore = "1.6.1"
 androidxTestRules = "1.6.1"
-androidxTestRunner = "1.6.2"
 composeUiTest = "1.7.5"
 hiltTesting = "2.49"
 
