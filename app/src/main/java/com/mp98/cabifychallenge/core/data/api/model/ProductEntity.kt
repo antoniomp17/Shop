@@ -11,6 +11,6 @@ data class ProductEntity(
     val name: String,
     val price: Double,
     val discount: String? = null,
-    val discountPrice: Double = price,
-    val minQuantity: Int = 0
+    val discountPrice: Double = price*0.95,
+    val minQuantity: Int = 3
 )
