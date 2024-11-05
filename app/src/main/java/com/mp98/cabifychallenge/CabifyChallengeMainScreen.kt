@@ -19,7 +19,7 @@ fun CabifyChallengeMainContent(productCartViewModel: ProductCartViewModel = hilt
 
         CustomScaffold(
             modifier = Modifier
-            .fillMaxSize(),
+                .fillMaxSize(),
             productCartViewModel =  productCartViewModel,
             content = {
                 NavigationHost(

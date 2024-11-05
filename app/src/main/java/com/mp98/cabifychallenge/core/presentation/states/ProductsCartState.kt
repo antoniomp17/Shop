@@ -13,6 +13,8 @@ data class ProductsCartState(
     val showDiscountDialog: String? = null,
     val searchText: String = "",
     val filteredProducts: List<Product> = emptyList(),
-    val screen: NavigationRoute = NavigationRoute.ProductListScreen
+    val screen: NavigationRoute = NavigationRoute.ProductListScreen,
+
+    val error: String? = null
 
 )

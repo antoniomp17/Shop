@@ -34,4 +34,18 @@
 
     <string name="accept">ACEPTAR</string>
 
+    <string name="error_fetching_products">"Lo sentimos, hubo un problema al cargar los productos.
+        Por favor, verifica tu conexión a internet o intenta de nuevo más tarde."</string>
+
+    <string name="error_fetching_cart_products">"No hemos podido acceder a los productos de tu
+        carrito en este momento. Revisa tu conexión o intenta más tarde."</string>
+
+    <string name="error_adding_product_to_cart">"No hemos podido añadir el producto al carrito.
+        Verifica tu conexión e inténtalo de nuevo."</string>
+
+    <string name="error_removing_product_from_cart">"Hubo un problema al eliminar el producto de
+        tu carrito. Por favor, inténtalo nuevamente."</string>
+
+    <string name="error_unknown">"Ha ocurrido un error desconocido.</string>
+
 </resources>

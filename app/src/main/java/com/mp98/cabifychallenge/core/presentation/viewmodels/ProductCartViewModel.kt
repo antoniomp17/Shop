@@ -14,6 +14,7 @@ import com.mp98.cabifychallenge.core.domain.usecases.RemoveCartProductUseCase
 import com.mp98.cabifychallenge.core.domain.usecases.SetCartProductUseCase
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.states.ProductsCartState
+import com.mp98.cabifychallenge.core.utils.ErrorType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -55,8 +56,7 @@ class ProductCartViewModel @Inject constructor(
                 fetchCartProducts()
 
             } catch (e: Exception) {
-                //TODO: Manejar el error en el estado
-                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+                _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_FETCHING_PRODUCTS) }
             }
         }
     }
@@ -74,8 +74,7 @@ class ProductCartViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
-                //TODO: Manejar el error en el estado
-                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+                _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_FETCHING_CART_PRODUCTS) }
             }
         }
     }
@@ -94,8 +93,7 @@ class ProductCartViewModel @Inject constructor(
             try {
                 setCartProductUseCase(ProductCart(code = product.code))
             } catch (e: Exception) {
-                //TODO: Manejar el error en el estado
-                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+                _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_ADDING_PRODUCT_TO_CART) }
             }
         }
     }
@@ -105,8 +103,7 @@ class ProductCartViewModel @Inject constructor(
             try {
                 removeCartProductUseCase(product.code)
             } catch (e: Exception) {
-                //TODO: Manejar el error en el estado
-                //_productsCartState.update { state -> state.copy(error = "Error al cargar productos") }
+                _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_REMOVING_PRODUCT_FROM_CART) }
             }
         }
     }

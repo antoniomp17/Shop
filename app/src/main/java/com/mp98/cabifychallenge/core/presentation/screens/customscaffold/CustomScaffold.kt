@@ -2,18 +2,14 @@ package com.mp98.cabifychallenge.core.presentation.screens.customscaffold
 
 import android.app.Activity
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ShoppingBag
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
@@ -37,9 +33,10 @@ import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.compone
 import com.mp98.cabifychallenge.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.cabifychallenge.core.presentation.states.ProductsCartState
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
+import com.mp98.cabifychallenge.core.utils.ErrorType
 import com.mp98.cabifychallenge.core.utils.dynamicPadding
 import com.mp98.cabifychallenge.core.utils.scalableText
-import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
+import com.mp98.cabifychallenge.ui.theme.primaryColor
 
 @Composable
 fun CustomScaffold(
@@ -100,7 +97,22 @@ fun CustomScaffold(
             HorizontalDivider(
                 thickness = 0.5.dp
             )
-            content()
+            if(state.error != null){
+                Box(
+                    modifier = Modifier.fillMaxSize().dynamicPadding(),
+                    contentAlignment = Alignment.Center
+                ){
+                    Text(
+                        text = ErrorType.getErrorTypeMessage(state.error!!),
+                        fontSize = scalableText(22.sp),
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = primaryColor
+                    )
+                }
+            } else {
+                content()
+            }
         }
     }
 }
