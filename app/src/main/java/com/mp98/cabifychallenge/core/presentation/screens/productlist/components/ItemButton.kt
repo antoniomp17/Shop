@@ -18,7 +18,7 @@ fun ItemButton(
     val state by productCartViewModel.productsCartState.collectAsState()
 
     if(state.cart.items.contains(product)){
-        AddOrTakeOutButton(product, productCartViewModel, state, modifier)
+        AddOrTakeOutButton(product, productCartViewModel, modifier)
     } else {
         AddButton(product, productCartViewModel, modifier)
     }

@@ -30,6 +30,8 @@
 
     <string name="your_purchase">TU COMPRA</string>
 
+    <string name="empty_cart_message">Tu carrito está vacío</string>
+
     <string name="accept">ACEPTAR</string>
 
 </resources>

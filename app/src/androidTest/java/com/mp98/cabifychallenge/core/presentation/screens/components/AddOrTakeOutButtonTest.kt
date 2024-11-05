@@ -1,8 +1,9 @@
-package com.mp98.cabifychallenge.core.presentation.screens.customScaffold.components
+package com.mp98.cabifychallenge.core.presentation.screens.components
 
 import androidx.activity.compose.setContent
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ShoppingCart
+import androidx.compose.material.icons.rounded.Delete
+import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.ui.test.isDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
@@ -11,9 +12,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mp98.cabifychallenge.MainActivity
 import com.mp98.cabifychallenge.core.domain.model.Product
-import com.mp98.cabifychallenge.core.presentation.screens.customscaffold.components.CartButton
 import com.mp98.cabifychallenge.core.presentation.viewmodels.ProductCartViewModel
-import com.mp98.cabifychallenge.core.utils.toCurrencyFormat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
@@ -21,7 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-class CartButtonTest {
+class AddOrTakeOutButtonTest {
 
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
@@ -32,29 +31,22 @@ class CartButtonTest {
     private lateinit var productCartViewModel: ProductCartViewModel
 
     private val voucher = Product(code = "VOUCHER", name = "Test Product", price = 5.0)
-    val tshirt = Product(code = "TSHIRT", name = "Test Product", price = 20.0)
-
 
     @Before
     fun setUp() {
         hiltRule.inject()
-
         composeTestRule.activity.setContent {
             productCartViewModel = hiltViewModel()
-            CartButton(
-                productCartViewModel = productCartViewModel,
-                onChangeToCart = {}
+            AddOrTakeOutButton(
+                product = voucher,
+                productCartViewModel = productCartViewModel
             )
         }
         composeTestRule.waitForIdle()
     }
 
     @Test
-    fun cartButton_displaysCorrectly() {
-        composeTestRule.onNodeWithContentDescription(Icons.Rounded.ShoppingCart.name).assertExists()
-
-        composeTestRule.onNodeWithText(0.0.toCurrencyFormat()).assertExists()
-
+    fun addOrTakeOutButton_addProductIncrementsCount() {
         composeTestRule.runOnUiThread {
             productCartViewModel.addProductToCart(voucher)
         }
@@ -64,7 +56,6 @@ class CartButtonTest {
         }
 
         composeTestRule.onNodeWithText("1").assertExists()
-        composeTestRule.onNodeWithText(5.0.toCurrencyFormat()).assertExists()
 
         composeTestRule.runOnUiThread {
             productCartViewModel.removeProductFromCart(voucher)
@@ -72,34 +63,7 @@ class CartButtonTest {
     }
 
     @Test
-    fun cartButton_removesProductFromCart() {
-        composeTestRule.runOnUiThread {
-            productCartViewModel.addProductToCart(voucher)
-        }
-
-        composeTestRule.waitUntil {
-            composeTestRule.onAllNodesWithText("1").fetchSemanticsNodes().isNotEmpty()
-        }
-
-        composeTestRule.onNodeWithText("1").assertExists()
-        composeTestRule.onNodeWithText(5.0.toCurrencyFormat()).assertExists()
-
-        composeTestRule.runOnUiThread {
-            productCartViewModel.removeProductFromCart(voucher)
-        }
-
-        composeTestRule.waitForIdle()
-
-        composeTestRule.waitUntil {
-            composeTestRule.onNodeWithText(0.0.toCurrencyFormat()).isDisplayed()
-        }
-
-        composeTestRule.onNodeWithText(0.0.toCurrencyFormat()).assertExists()
-    }
-
-    @Test
-    fun cartButton_applies2X1DiscountToProduct() {
-
+    fun addOrTakeOutButton_removeProductDecrementsCount() {
         composeTestRule.runOnUiThread {
             productCartViewModel.addProductToCart(voucher)
             productCartViewModel.addProductToCart(voucher)
@@ -109,42 +73,71 @@ class CartButtonTest {
             composeTestRule.onAllNodesWithText("2").fetchSemanticsNodes().isNotEmpty()
         }
 
-        val expectedPrice = 5.0.toCurrencyFormat()
-
         composeTestRule.onNodeWithText("2").assertExists()
-        composeTestRule.onNodeWithText(expectedPrice).assertExists()
 
         composeTestRule.runOnUiThread {
             productCartViewModel.removeProductFromCart(voucher)
+        }
+
+        composeTestRule.waitUntil {
+            composeTestRule.onAllNodesWithText("1").fetchSemanticsNodes().isNotEmpty()
+        }
+
+        composeTestRule.onNodeWithText("1").assertExists()
+
+        composeTestRule.runOnUiThread {
             productCartViewModel.removeProductFromCart(voucher)
         }
     }
 
     @Test
-    fun cartButton_appliesBulkDiscountToProduct() {
-
+    fun addOrTakeOutButton_addAndRemoveProductCorrectlyUpdatesCount() {
         composeTestRule.runOnUiThread {
-            productCartViewModel.addProductToCart(tshirt)
-            productCartViewModel.addProductToCart(tshirt)
-            productCartViewModel.addProductToCart(tshirt)
+            productCartViewModel.addProductToCart(voucher)
         }
-
-        val expectedPrice = 57.0.toCurrencyFormat()
 
         composeTestRule.waitUntil {
-            composeTestRule.onAllNodesWithText("3").fetchSemanticsNodes().isNotEmpty()
-            composeTestRule.onAllNodesWithText(expectedPrice).fetchSemanticsNodes().isNotEmpty()
+            composeTestRule.onAllNodesWithText("1").fetchSemanticsNodes().isNotEmpty()
         }
 
-        composeTestRule.onNodeWithText("3").assertExists()
-        composeTestRule.onNodeWithText(expectedPrice).assertExists()
+        composeTestRule.onNodeWithText("1").assertExists()
 
         composeTestRule.runOnUiThread {
-            productCartViewModel.removeProductFromCart(tshirt)
-            productCartViewModel.removeProductFromCart(tshirt)
-            productCartViewModel.removeProductFromCart(tshirt)
+            productCartViewModel.removeProductFromCart(voucher)
         }
+
+        composeTestRule.waitUntil {
+            composeTestRule.onAllNodesWithText("0").fetchSemanticsNodes().isNotEmpty()
+        }
+
+        composeTestRule.onNodeWithText("0").assertExists()
     }
 
-}
+    @Test
+    fun addOrTakeOutButton_showsCorrectIconBasedOnCount() {
+        composeTestRule.runOnUiThread {
+            productCartViewModel.addProductToCart(voucher)
+        }
 
+        composeTestRule.waitUntil {
+            composeTestRule.onNodeWithContentDescription(Icons.Rounded.Delete.name).isDisplayed()
+        }
+
+        composeTestRule.onNodeWithContentDescription(Icons.Rounded.Delete.name).assertExists()
+
+        composeTestRule.runOnUiThread {
+            productCartViewModel.addProductToCart(voucher)
+        }
+
+        composeTestRule.waitUntil {
+            composeTestRule.onNodeWithContentDescription(Icons.Rounded.Remove.name).isDisplayed()
+        }
+
+        composeTestRule.onNodeWithContentDescription(Icons.Rounded.Remove.name).assertExists()
+
+        composeTestRule.runOnUiThread {
+            productCartViewModel.removeProductFromCart(voucher)
+            productCartViewModel.removeProductFromCart(voucher)
+        }
+    }
+}

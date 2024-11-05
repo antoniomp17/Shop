@@ -30,6 +30,8 @@
 
     <string name="your_purchase">YOUR PURCHASE</string>
 
+    <string name="empty_cart_message">Your cart is empty</string>
+
     <string name="accept">ACCEPT</string>
 
 </resources>

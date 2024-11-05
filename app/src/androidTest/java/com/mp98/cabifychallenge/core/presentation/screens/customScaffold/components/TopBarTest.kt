@@ -1,8 +1,13 @@
 package com.mp98.cabifychallenge.core.presentation.screens.customScaffold.components
 
 import androidx.activity.compose.setContent
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -50,12 +55,12 @@ class TopBarTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithTag("SearchBar").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Your Purchase").assertDoesNotExist()
+        composeTestRule.onNodeWithContentDescription(Icons.Rounded.Search.name).assertIsDisplayed()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.your_purchase)).assertDoesNotExist()
     }
 
     @Test
-    fun topBar_displaysYourPurchaseInCartScreen() {
+    fun topBar_doesNotDisplaySearchBarInCartScreen() {
         composeTestRule.runOnUiThread {
             productCartViewModel.changeScreen(NavigationRoute.CartListScreen)
         }
@@ -63,7 +68,7 @@ class TopBarTest {
 
         composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.your_purchase))
             .assertIsDisplayed()
-        composeTestRule.onNodeWithTag("SearchBar").assertDoesNotExist()
+        composeTestRule.onNodeWithTag(Icons.Rounded.ShoppingCart.name).assertDoesNotExist()
     }
 
     @Test
@@ -73,7 +78,7 @@ class TopBarTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithTag("CartButton").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription(Icons.Rounded.ShoppingCart.name).assertIsDisplayed()
     }
 
     @Test
@@ -83,6 +88,6 @@ class TopBarTest {
         }
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithTag("CartButton").assertDoesNotExist()
+        composeTestRule.onNodeWithContentDescription(Icons.Rounded.ShoppingCart.name).assertIsNotDisplayed()
     }
 }

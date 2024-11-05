@@ -5,19 +5,16 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="NavigationHostTest">
+      <SelectionState runConfigName="CartListTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="CustomScaffoldTest">
+      <SelectionState runConfigName="cartList_displaysItemsCorrectly()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="SearchBarTest">
+      <SelectionState runConfigName="CartItemTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="CartButtonTest">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="cartButton_removesProductFromCart()">
+      <SelectionState runConfigName="Tests in 'com.mp98.cabifychallenge'">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

@@ -17,6 +17,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,9 +38,10 @@ import com.mp98.cabifychallenge.ui.theme.secondaryColor
 fun AddOrTakeOutButton(
     product: Product,
     productCartViewModel: ProductCartViewModel,
-    state: ProductsCartState,
     modifier: Modifier = Modifier
 ){
+
+    val state by productCartViewModel.productsCartState.collectAsState()
 
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -98,7 +101,7 @@ private fun TakeOutButton(
         ),
         modifier = modifier
     ) {
-        if(state.cart.items.count{it == product} > 1){
+        if(state.cart.items.count{it.code == product.code } > 1){
             Icon(
                 imageVector = Icons.Rounded.Remove,
                 contentDescription = Icons.Rounded.Remove.name
