@@ -15,6 +15,8 @@ data class ProductsCartState(
     val filteredProducts: List<Product> = emptyList(),
     val screen: NavigationRoute = NavigationRoute.ProductListScreen,
 
+    val sessionUrl: String? = null,
+
     val error: String? = null
 
 )

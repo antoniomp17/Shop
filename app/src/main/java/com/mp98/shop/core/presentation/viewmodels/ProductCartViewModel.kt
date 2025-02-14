@@ -10,6 +10,7 @@ import com.mp98.shop.core.domain.model.Product
 import com.mp98.shop.core.domain.model.ProductCart
 import com.mp98.shop.core.domain.usecases.GetAllCartProductsUseCase
 import com.mp98.shop.core.domain.usecases.GetProductsUseCase
+import com.mp98.shop.core.domain.usecases.InitVerifierSessionUseCase
 import com.mp98.shop.core.domain.usecases.RemoveCartProductUseCase
 import com.mp98.shop.core.domain.usecases.SetCartProductUseCase
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
@@ -30,6 +31,7 @@ class ProductCartViewModel @Inject constructor(
     private val getAllCartProductsUseCase: GetAllCartProductsUseCase,
     private val setCartProductUseCase: SetCartProductUseCase,
     private val removeCartProductUseCase: RemoveCartProductUseCase,
+    private val initVerifierSessionUseCase: InitVerifierSessionUseCase
 ) : ViewModel() {
 
     private val _productsCartState = MutableStateFlow(ProductsCartState())
@@ -39,6 +41,19 @@ class ProductCartViewModel @Inject constructor(
 
     init {
         fetchProducts()
+    }
+
+    fun initVerifierSession() {
+        viewModelScope.launch {
+            try {
+                val sessionUrl = initVerifierSessionUseCase()
+                _productsCartState.update { state ->
+                    state.copy(sessionUrl = sessionUrl)
+                }
+            } catch (e: Exception) {
+                _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_INIT_VERIFIER_SESSION) }
+            }
+        }
     }
 
     fun fetchProducts() {

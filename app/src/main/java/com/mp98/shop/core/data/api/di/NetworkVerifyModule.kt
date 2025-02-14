@@ -1,6 +1,6 @@
 package com.mp98.shop.core.data.api.di
 
-import com.mp98.shop.core.data.api.service.ProductService
+import com.mp98.shop.core.data.api.service.VerifyService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,23 +8,26 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object NetworkVerifyModule {
 
     @Provides
     @Singleton
+    @Named("verifyOkHttp")
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().build()
     }
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    @Named("verifyRetrofit")
+    fun provideRetrofit(@Named("verifyOkHttp") okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://www.jsonkeeper.com/")
+            .baseUrl("http://192.168.1.247:7003/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -32,7 +35,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideProductService(retrofit: Retrofit): ProductService {
-        return retrofit.create(ProductService::class.java)
+    fun provideVerifyService(@Named("verifyRetrofit") retrofit: Retrofit): VerifyService {
+        return retrofit.create(VerifyService::class.java)
     }
 }
