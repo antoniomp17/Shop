@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CabifyChallenge</string>
+    <string name="app_name">Shop</string>
 
     <string name="search">Search…</string>
 
@@ -47,5 +47,7 @@
         your cart. Please try again."</string>
 
     <string name="error_unknown">"An unknown error has occurred."</string>
+
+    <string name="identy_credential_question">"Have you an Identy Credential?"</string>
 
 </resources>

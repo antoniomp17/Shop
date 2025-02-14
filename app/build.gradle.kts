@@ -11,11 +11,11 @@ android {
         create("release") {
         }
     }
-    namespace = "com.mp98.cabifychallenge"
+    namespace = "com.mp98.shop"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.mp98.cabifychallenge"
+        applicationId = "com.mp98.shop"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -25,7 +25,7 @@ android {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
 
-        testInstrumentationRunner = "com.mp98.cabifychallenge.CustomTestRunner"
+        testInstrumentationRunner = "com.mp98.shop.CustomTestRunner"
     }
 
     buildTypes {

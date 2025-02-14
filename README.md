@@ -1,5 +1,5 @@
 
-# Cabify Challenge
+# Shop Challenge
 
 This project is a mobile app that allows users to browse a list of products, add them to their cart, and proceed to checkout with applied discounts. Built with production-ready standards, the app fetches product data from a remote source using Retrofit and uses Room for local data storage. The architecture follows Clean principles, structured with Jetpack Compose for a modern UI experience. Discounts, such as "2-for-1" and bulk pricing, are calculated dynamically to provide users with transparent pricing information. Basic unit and UI testing ensure reliability, with MutableStateFlow handling state management effectively.
 
@@ -13,7 +13,7 @@ The app provides an intuitive, user-friendly product list with dynamically appli
 The top bar of the product list screen includes a search bar to quickly find any desired product. A microphone button enables voice input, converting spoken words to text for ease of use. The top bar also displays a cart icon showing the total items in the cart and the cumulative price.
 
 - *Discount Highlighting and Descriptions*
-Items with active discounts are highlighted with Cabify’s signature purple tone and marked with a discount type notation. Tapping on a discounted item opens a dialog displaying detailed information about the discount.
+Items with active discounts are highlighted with Shop’s signature purple tone and marked with a discount type notation. Tapping on a discounted item opens a dialog displaying detailed information about the discount.
 
 - *Cart Overview*
 In the cart screen, users can view the items selected for purchase, each listed in an adaptive LazyColumn with the same functionalities as the product list screen. Here, each item's accumulated total price is displayed.

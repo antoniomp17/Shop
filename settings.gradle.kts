@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CabifyChallenge"
+rootProject.name = "Shop"
 include(":app")
  

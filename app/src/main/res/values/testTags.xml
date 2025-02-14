@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="cabify_challenge_main_content" translatable="false">CabifyChallengeMainContent</string>
+    <string name="shop_main_content" translatable="false">ShopMainContent</string>
 
 </resources>
