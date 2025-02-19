@@ -10,6 +10,8 @@ object ErrorType {
     const val ERROR_ADDING_PRODUCT_TO_CART = "ERROR_ADDING_PRODUCT_TO_CART"
     const val ERROR_REMOVING_PRODUCT_FROM_CART = "ERROR_REMOVING_PRODUCT_FROM_CART"
     const val ERROR_INIT_VERIFIER_SESSION = "ERROR_INIT_VERIFIER_SESSION"
+    const val ERROR_LISTENING_SESSION = "ERROR_LISTENING_SESSION"
+
 
     @Composable
     fun getErrorTypeMessage(errorType: String): String {
@@ -19,6 +21,7 @@ object ErrorType {
             "ERROR_ADDING_PRODUCT_TO_CART" -> stringResource(R.string.error_adding_product_to_cart)
             "ERROR_REMOVING_PRODUCT_FROM_CART" -> stringResource(R.string.error_removing_product_from_cart)
             "ERROR_INIT_VERIFIER_SESSION" -> "Error initializing verifier session"
+            "ERROR_LISTENING_SESSION" -> "Error listening to session"
             else -> stringResource(R.string.error_unknown)
         }
     }

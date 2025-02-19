@@ -13,6 +13,7 @@ import com.mp98.shop.core.domain.usecases.GetProductsUseCase
 import com.mp98.shop.core.domain.usecases.InitVerifierSessionUseCase
 import com.mp98.shop.core.domain.usecases.RemoveCartProductUseCase
 import com.mp98.shop.core.domain.usecases.SetCartProductUseCase
+import com.mp98.shop.core.domain.usecases.StartListeningSessionUseCase
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.shop.core.presentation.states.ProductsCartState
 import com.mp98.shop.core.utils.ErrorType
@@ -31,7 +32,8 @@ class ProductCartViewModel @Inject constructor(
     private val getAllCartProductsUseCase: GetAllCartProductsUseCase,
     private val setCartProductUseCase: SetCartProductUseCase,
     private val removeCartProductUseCase: RemoveCartProductUseCase,
-    private val initVerifierSessionUseCase: InitVerifierSessionUseCase
+    private val initVerifierSessionUseCase: InitVerifierSessionUseCase,
+    private val startListeningSessionUseCase: StartListeningSessionUseCase
 ) : ViewModel() {
 
     private val _productsCartState = MutableStateFlow(ProductsCartState())
@@ -41,17 +43,45 @@ class ProductCartViewModel @Inject constructor(
 
     init {
         fetchProducts()
+        observeSessionState()
+    }
+
+    private fun observeSessionState() {
+        viewModelScope.launch {
+            productsCartState.collectLatest { state ->
+                state.sessionState?.let { sessionJson ->
+                    val name = sessionJson.opt("First Name")?.toString()
+
+                    if (name != null) {
+                        setName(name)
+                    }
+                }
+            }
+        }
     }
 
     fun initVerifierSession() {
         viewModelScope.launch {
             try {
-                val sessionUrl = initVerifierSessionUseCase()
+                val pairSession = initVerifierSessionUseCase()
                 _productsCartState.update { state ->
-                    state.copy(sessionUrl = sessionUrl)
+                    state.copy(sessionUrl = pairSession.first)
                 }
+                pairSession.second?.let { startListeningSession(it) }
             } catch (e: Exception) {
                 _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_INIT_VERIFIER_SESSION) }
+            }
+        }
+    }
+
+    private fun startListeningSession(id: String){
+        viewModelScope.launch {
+            startListeningSessionUseCase(id).onSuccess {
+                _productsCartState.update { state ->
+                    state.copy(sessionState = it)
+                }
+            }.onFailure {
+                _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_LISTENING_SESSION) }
             }
         }
     }
@@ -100,6 +130,12 @@ class ProductCartViewModel @Inject constructor(
         }
         _productsCartState.update { state ->
             state.copy(cart = state.cart.setDiscounts(discounts))
+        }
+    }
+
+    private fun setName(name: String){
+        _productsCartState.update { currentState ->
+            currentState.copy(name = name)
         }
     }
 

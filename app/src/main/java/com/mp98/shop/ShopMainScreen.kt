@@ -33,6 +33,7 @@ fun ShopMainContent(productCartViewModel: ProductCartViewModel = hiltViewModel()
 
             if (intent.resolveActivity(context.packageManager) != null) {
                 context.startActivity(intent)
+
             } else {
                 Log.e("DeepLink", "No app found to handle the deep link")
             }

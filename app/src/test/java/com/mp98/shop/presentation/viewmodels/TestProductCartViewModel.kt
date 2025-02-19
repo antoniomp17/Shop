@@ -4,8 +4,10 @@ import com.mp98.shop.core.domain.model.Product
 import com.mp98.shop.core.domain.model.ProductCart
 import com.mp98.shop.core.domain.usecases.GetAllCartProductsUseCase
 import com.mp98.shop.core.domain.usecases.GetProductsUseCase
+import com.mp98.shop.core.domain.usecases.InitVerifierSessionUseCase
 import com.mp98.shop.core.domain.usecases.RemoveCartProductUseCase
 import com.mp98.shop.core.domain.usecases.SetCartProductUseCase
+import com.mp98.shop.core.domain.usecases.StartListeningSessionUseCase
 import com.mp98.shop.core.presentation.viewmodels.ProductCartViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,6 +31,8 @@ class TestProductCartViewModel {
     private lateinit var getAllCartProductsUseCase: GetAllCartProductsUseCase
     private lateinit var setCartProductUseCase: SetCartProductUseCase
     private lateinit var removeCartProductUseCase: RemoveCartProductUseCase
+    private lateinit var initVerifierSessionUseCase: InitVerifierSessionUseCase
+    private lateinit var startListeningSessionUseCase: StartListeningSessionUseCase
 
     private val testDispatcher = StandardTestDispatcher()
 
@@ -40,13 +44,17 @@ class TestProductCartViewModel {
         getProductsUseCase = mock(GetProductsUseCase::class.java)
         getAllCartProductsUseCase = mock(GetAllCartProductsUseCase::class.java)
         setCartProductUseCase = mock(SetCartProductUseCase::class.java)
+        initVerifierSessionUseCase = mock(InitVerifierSessionUseCase::class.java)
         removeCartProductUseCase = mock(RemoveCartProductUseCase::class.java)
+        startListeningSessionUseCase = mock(StartListeningSessionUseCase::class.java)
 
         viewModel = ProductCartViewModel(
             getProductsUseCase,
             getAllCartProductsUseCase,
             setCartProductUseCase,
-            removeCartProductUseCase
+            removeCartProductUseCase,
+            initVerifierSessionUseCase,
+            startListeningSessionUseCase
         )
     }
 
