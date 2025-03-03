@@ -21,7 +21,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +28,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mp98.shop.core.presentation.screens.customscaffold.components.BottomBar
-import com.mp98.shop.core.presentation.screens.customscaffold.components.GetCredentialsBottomBar
 import com.mp98.shop.core.presentation.screens.customscaffold.components.TopBar
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.shop.core.presentation.states.ProductsCartState

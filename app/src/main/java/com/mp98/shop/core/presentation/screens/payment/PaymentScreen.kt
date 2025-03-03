@@ -66,7 +66,6 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Resumen del pedido
         Card(
             modifier = Modifier.fillMaxWidth(),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -94,7 +93,9 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { /* Lógica de pago */ },
+            onClick = {
+                cartViewModel.initVerifierSession()
+            },
             enabled = selectedMethod != null,
             modifier = Modifier.fillMaxWidth()
         ) {
