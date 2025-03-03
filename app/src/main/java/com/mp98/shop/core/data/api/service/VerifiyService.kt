@@ -2,7 +2,6 @@ package com.mp98.shop.core.data.api.service
 
 import com.google.gson.annotations.SerializedName
 import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

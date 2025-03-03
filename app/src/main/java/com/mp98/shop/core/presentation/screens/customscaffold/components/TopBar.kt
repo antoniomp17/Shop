@@ -22,6 +22,7 @@ import com.mp98.shop.ui.theme.primaryColor
 @Composable
 fun TopBar(
     productCartViewModel: ProductCartViewModel,
+    onChangeToProducts: () -> Unit,
     onChangeToCart: () -> Unit
 ){
 
@@ -47,6 +48,13 @@ fun TopBar(
             if(state.screen == NavigationRoute.ProductListScreen){
                 CartButton(productCartViewModel = productCartViewModel){
                     onChangeToCart()
+                }
+            }
+        },
+        navigationIcon = {
+            if(state.screen == NavigationRoute.CartListScreen){
+                BackButton {
+                    onChangeToProducts()
                 }
             }
         }

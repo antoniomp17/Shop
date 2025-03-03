@@ -60,15 +60,20 @@ fun CustomScaffold(
         bottomBar = {
             if (state.screen == NavigationRoute.CartListScreen){
                 BottomBar(productCartViewModel = productCartViewModel)
-            } else {
-                GetCredentialsBottomBar(productCartViewModel = productCartViewModel)
             }
         },
         topBar = {
-            TopBar(productCartViewModel = productCartViewModel){
-                productCartViewModel.changeScreen(NavigationRoute.CartListScreen)
-                onChangeToCart()
-            }
+            TopBar(
+                productCartViewModel = productCartViewModel,
+                onChangeToProducts = {
+                    productCartViewModel.changeScreen(NavigationRoute.ProductListScreen)
+                    onChangeToProducts()
+                },
+                onChangeToCart = {
+                    productCartViewModel.changeScreen(NavigationRoute.CartListScreen)
+                    onChangeToCart()
+                }
+            )
         },
         floatingActionButton = {
             if(state.screen == NavigationRoute.CartListScreen) {
