@@ -45,7 +45,8 @@ fun CustomScaffold(
     productCartViewModel: ProductCartViewModel,
     content: @Composable () -> Unit,
     onChangeToCart: () -> Unit,
-    onChangeToProducts: () -> Unit
+    onChangeToProducts: () -> Unit,
+    onChangeToPayment: () -> Unit
 ) {
 
     val state by productCartViewModel.productsCartState.collectAsState()
@@ -81,8 +82,8 @@ fun CustomScaffold(
                     FloatingActionButton(
                         shape = RoundedCornerShape(50.dp),
                         onClick = {
-                            productCartViewModel.changeScreen(NavigationRoute.ProductListScreen)
-                            onChangeToProducts()
+                            productCartViewModel.changeScreen(NavigationRoute.PaymentScreen)
+                            onChangeToPayment()
                         },
                         modifier = Modifier
                             .testTag("FloatingActionButton")

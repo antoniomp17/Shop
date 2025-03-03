@@ -56,6 +56,10 @@ fun TopBar(
                 BackButton {
                     onChangeToProducts()
                 }
+            } else {
+                BackButton {
+                    onChangeToCart()
+                }
             }
         }
     )

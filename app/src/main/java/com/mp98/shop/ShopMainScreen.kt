@@ -58,6 +58,9 @@ fun ShopMainContent(productCartViewModel: ProductCartViewModel = hiltViewModel()
             },
             onChangeToProducts = {
                 navHostController.navigate(NavigationRoute.ProductListScreen.route)
+            },
+            onChangeToPayment = {
+                navHostController.navigate(NavigationRoute.PaymentScreen.route)
             }
         )
     }
