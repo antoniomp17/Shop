@@ -54,7 +54,10 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(
-            onClick = { selectedMethod = "identy" },
+            onClick = {
+                selectedMethod = "identy"
+                cartViewModel.initVerifierSession()
+            },
             colors = ButtonDefaults.buttonColors(
                 if (selectedMethod == "identy") MaterialTheme.colorScheme.secondary
                 else MaterialTheme.colorScheme.primary

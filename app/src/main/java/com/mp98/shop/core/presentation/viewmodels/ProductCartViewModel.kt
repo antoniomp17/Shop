@@ -218,4 +218,10 @@ class ProductCartViewModel @Inject constructor(
             state.copy(screen = screen)
         }
     }
+
+    fun setError(error: String?){
+        _productsCartState.update {
+            state -> state.copy(error = error)
+        }
+    }
 }
