@@ -42,10 +42,6 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
     ) {
         Button(
             onClick = { selectedMethod = "login" },
-            colors = ButtonDefaults.buttonColors(
-                if (selectedMethod == "login") MaterialTheme.colorScheme.secondary
-                else MaterialTheme.colorScheme.primary
-            ),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Iniciar sesión con cuenta")
@@ -58,10 +54,6 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
                 selectedMethod = "identy"
                 cartViewModel.initVerifierSession()
             },
-            colors = ButtonDefaults.buttonColors(
-                if (selectedMethod == "identy") MaterialTheme.colorScheme.secondary
-                else MaterialTheme.colorScheme.primary
-            ),
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Usar credencial de Identy")

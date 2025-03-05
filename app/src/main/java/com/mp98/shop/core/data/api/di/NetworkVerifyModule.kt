@@ -27,7 +27,7 @@ object NetworkVerifyModule {
     @Named("verifyRetrofit")
     fun provideRetrofit(@Named("verifyOkHttp") okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.138:7003/")
+            .baseUrl("http://192.168.1.43:7003/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

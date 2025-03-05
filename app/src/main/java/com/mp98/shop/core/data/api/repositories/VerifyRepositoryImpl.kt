@@ -2,9 +2,8 @@ package com.mp98.shop.core.data.api.repositories
 
 import android.net.Uri
 import android.util.Log
-import com.mp98.shop.core.data.api.service.CredentialRequest
-import com.mp98.shop.core.data.api.service.PresentationRequest
 import com.mp98.shop.core.data.api.service.VerifyService
+import com.mp98.shop.core.data.api.service.createPresentationRequest
 import com.mp98.shop.core.domain.repositories.VerifyRepository
 import kotlinx.coroutines.delay
 import org.json.JSONObject
@@ -15,11 +14,7 @@ class VerifyRepositoryImpl @Inject constructor(
 ) : VerifyRepository {
     override suspend fun generatePresentationRequest(): Result<Pair<String, String?>> {
         try {
-            val request = PresentationRequest(
-                requestCredentials = listOf(
-                    CredentialRequest(format = "jwt_vc_json", type = "DocumentId")
-                )
-            )
+            val request = createPresentationRequest()
 
             val response = verifyService.initOidcPresentationSession(request = request)
 
