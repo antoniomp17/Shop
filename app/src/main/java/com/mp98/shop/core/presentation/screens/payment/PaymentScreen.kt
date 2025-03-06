@@ -28,9 +28,7 @@ import com.mp98.shop.core.utils.toCurrencyFormat
 
 @Composable
 fun PaymentScreen(cartViewModel: ProductCartViewModel) {
-
     val state by cartViewModel.productsCartState.collectAsState()
-
     var selectedMethod by remember { mutableStateOf<String?>(null) }
 
     Column(
@@ -61,6 +59,7 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Resumen del pedido
         Card(
             modifier = Modifier.fillMaxWidth(),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -72,7 +71,7 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 state.products.forEach { product ->
-                    if (cartViewModel.getProductsOfCode(product.code).isNotEmpty()){
+                    if (cartViewModel.getProductsOfCode(product.code).isNotEmpty()) {
                         Text("${product.name} - " +
                                 cartViewModel.getProductsOfCode(product.code).size.toString()
                         )
@@ -82,6 +81,34 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text("Total: ${state.cart.total.toCurrencyFormat()}", fontWeight = FontWeight.Bold)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Información del usuario
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text("Información del usuario", style = MaterialTheme.typography.headlineSmall)
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("Nombre: ${state.userInfo?.name ?: "No disponible"}")
+                Text("Apellido: ${state.userInfo?.lastName ?: "No disponible"}")
+                Text("Email: ${state.userInfo?.email ?: "No disponible"}")
+                Text("Dirección: ${state.userInfo?.address ?: "No disponible"}")
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text("Tarjeta de crédito", style = MaterialTheme.typography.headlineSmall)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("Número: ${state.userInfo?.cardNumber ?: "No disponible"}")
+                Text("Titular: ${state.userInfo?.cardHolder ?: "No disponible"}")
+                Text("Expiración: ${state.userInfo?.cardExpiration ?: "No disponible"}")
             }
         }
 

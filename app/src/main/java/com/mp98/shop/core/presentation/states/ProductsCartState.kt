@@ -2,6 +2,7 @@ package com.mp98.shop.core.presentation.states
 
 import com.mp98.shop.core.domain.cart.Cart
 import com.mp98.shop.core.domain.model.Product
+import com.mp98.shop.core.presentation.models.UserInfo
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
 import org.json.JSONObject
 
@@ -16,10 +17,10 @@ data class ProductsCartState(
     val filteredProducts: List<Product> = emptyList(),
     val screen: NavigationRoute = NavigationRoute.ProductListScreen,
 
-    val name: String = "",
+    val userInfo: UserInfo? = null,
 
     val sessionUrl: String? = null,
-    val sessionState: JSONObject? = null,
+    val sessionState: List<JSONObject>? = null,
 
     val error: String? = null
 

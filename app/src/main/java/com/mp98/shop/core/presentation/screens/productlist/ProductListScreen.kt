@@ -29,9 +29,9 @@ fun ProductList(productCartViewModel: ProductCartViewModel){
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ){
-        if(state.name.isNotEmpty()){
+        if(state.userInfo?.name?.isNotEmpty() == true){
             Text(
-                text = "Welcome ${state.name}",
+                text = "Welcome ${state.userInfo?.name}",
                 style = MaterialTheme.typography.titleSmall
             )
         }

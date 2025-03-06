@@ -14,6 +14,7 @@ import com.mp98.shop.core.domain.usecases.InitVerifierSessionUseCase
 import com.mp98.shop.core.domain.usecases.RemoveCartProductUseCase
 import com.mp98.shop.core.domain.usecases.SetCartProductUseCase
 import com.mp98.shop.core.domain.usecases.StartListeningSessionUseCase
+import com.mp98.shop.core.presentation.models.UserInfo
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.shop.core.presentation.states.ProductsCartState
 import com.mp98.shop.core.utils.ErrorType
@@ -49,12 +50,46 @@ class ProductCartViewModel @Inject constructor(
     private fun observeSessionState() {
         viewModelScope.launch {
             productsCartState.collectLatest { state ->
-                state.sessionState?.let { sessionJson ->
-                    val name = sessionJson.opt("First Name")?.toString()
+                state.sessionState?.let { sessionJsons ->
 
-                    if (name != null) {
-                        setName(name)
+                    var name: String? = null
+                    var lastName: String? = null
+                    var email: String? = null
+                    var address: String? = null
+                    var cardNumber: String? = null
+                    var cardHolder: String? = null
+                    var cardExpiration: String? = null
+
+                    for (json in sessionJsons) {
+                        when (json.optString("Document Type")) {
+                            "Spain National Identity Document" -> {
+                                name = json.optString("First Name")
+                                lastName = json.optString("Last Name")
+                                address = json.optString("Address")
+                            }
+                            "ContactCredential" -> {
+                                email = json.optString("Email")
+                            }
+                            "BankCredential" -> {
+                                cardNumber = json.optString("Card Number")
+                                cardHolder = json.optString("Card Holder")
+                                cardExpiration = json.optString("Card Expiration Date")
+                            }
+                        }
                     }
+
+                    setUserInfo(
+                        UserInfo(
+                            name = name ?: "",
+                            lastName = lastName ?: "",
+                            email = email ?: "",
+                            address = address ?: "",
+                            cardNumber = cardNumber ?: "",
+                            cardHolder = cardHolder ?: "",
+                            cardExpiration = cardExpiration ?: ""
+                        )
+                    )
+
                 }
             }
         }
@@ -77,11 +112,9 @@ class ProductCartViewModel @Inject constructor(
     private fun startListeningSession(id: String){
         viewModelScope.launch {
             startListeningSessionUseCase(id).onSuccess {
-                /*
                 _productsCartState.update { state ->
                     state.copy(sessionState = it)
                 }
-                 */
             }.onFailure {
                 _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_LISTENING_SESSION) }
             }
@@ -135,9 +168,9 @@ class ProductCartViewModel @Inject constructor(
         }
     }
 
-    private fun setName(name: String){
-        _productsCartState.update { currentState ->
-            currentState.copy(name = name)
+    private fun setUserInfo(userInfo: UserInfo){
+        _productsCartState.update { state ->
+            state.copy(userInfo = userInfo)
         }
     }
 
