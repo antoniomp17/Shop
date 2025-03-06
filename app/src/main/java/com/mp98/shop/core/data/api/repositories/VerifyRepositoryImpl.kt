@@ -35,7 +35,7 @@ class VerifyRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun listenToSession(id: String): Result<JSONObject> {
+    override suspend fun listenToSession(id: String): Result<List<JSONObject>> {
         val maxRetries = 20
         val delayMillis = 5000L
 
@@ -46,9 +46,9 @@ class VerifyRepositoryImpl @Inject constructor(
                     response.body()?.let { responseBody ->
                         val jsonObject = JSONObject(responseBody.string())
 
-                        val credentialSubject = extractCredentialSubject(jsonObject.toString())
+                        val credentialSubject = extractCredentialsSubjects(jsonObject.toString())
 
-                        if (credentialSubject != null) {
+                        if (credentialSubject.isNotEmpty()) {
                             return Result.success(credentialSubject)
                         }
                     }
@@ -61,20 +61,23 @@ class VerifyRepositoryImpl @Inject constructor(
         return Result.failure(Exception("Tiempo de espera agotado"))
     }
 
-    private fun extractCredentialSubject(json: String): JSONObject? {
+    private fun extractCredentialsSubjects(json: String): List<JSONObject> {
         // Parseamos el JSON completo
         val jsonObject = JSONObject(json)
 
         // Accedemos a los 'policyResults'
         val policyResults = jsonObject.optJSONObject("policyResults")?.optJSONArray("results")
 
+        val credentialSubjects = mutableListOf<JSONObject>()
 
         if (policyResults != null) {
             for (i in 0 until policyResults.length()) {
                 val result = policyResults.getJSONObject(i)
 
                 // Verificamos si el 'credential' es de tipo 'DocumentId'
-                if (result.getString("credential") == "DocumentId") {
+                if (result.getString("credential") == "ContactCredential" ||
+                    result.getString("credential") == "BankCredential" ||
+                    result.getString("credential") == "DocumentId") {
                     val policyResult = result.getJSONArray("policyResults").getJSONObject(0)
 
                     // Accedemos al campo 'credentialSubject' dentro de 'result'
@@ -82,10 +85,10 @@ class VerifyRepositoryImpl @Inject constructor(
                         .getJSONObject("vc")
                         .getJSONObject("credentialSubject")
 
-                    return credentialSubject
+                    credentialSubjects.add(credentialSubject)
                 }
             }
         }
-        return null
+        return credentialSubjects
     }
 }

@@ -6,7 +6,7 @@ import org.json.JSONObject
 class StartListeningSessionUseCase(
     private val verifyRepository: VerifyRepository
 ) {
-    suspend operator fun invoke(id: String): Result<JSONObject> {
+    suspend operator fun invoke(id: String): Result<List<JSONObject>> {
         return verifyRepository.listenToSession(id)
     }
 }

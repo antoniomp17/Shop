@@ -4,5 +4,5 @@ import org.json.JSONObject
 
 interface VerifyRepository {
     suspend fun generatePresentationRequest(): Result<Pair<String, String?>>
-    suspend fun listenToSession(id: String): Result<JSONObject>
+    suspend fun listenToSession(id: String): Result<List<JSONObject>>
 }

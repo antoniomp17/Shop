@@ -77,9 +77,11 @@ class ProductCartViewModel @Inject constructor(
     private fun startListeningSession(id: String){
         viewModelScope.launch {
             startListeningSessionUseCase(id).onSuccess {
+                /*
                 _productsCartState.update { state ->
                     state.copy(sessionState = it)
                 }
+                 */
             }.onFailure {
                 _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_LISTENING_SESSION) }
             }
