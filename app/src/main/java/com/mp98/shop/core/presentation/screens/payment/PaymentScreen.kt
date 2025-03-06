@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -23,11 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.shop.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.shop.core.utils.toCurrencyFormat
 
 @Composable
-fun PaymentScreen(cartViewModel: ProductCartViewModel) {
+fun PaymentScreen(cartViewModel: ProductCartViewModel, onChangeScreen: () -> Unit) {
     val state by cartViewModel.productsCartState.collectAsState()
     var selectedMethod by remember { mutableStateOf<String?>(null) }
 
@@ -116,12 +116,13 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel) {
 
         Button(
             onClick = {
-                cartViewModel.initVerifierSession()
+                cartViewModel.changeScreen(NavigationRoute.PaymentResultScreen)
+                onChangeScreen()
             },
-            enabled = selectedMethod != null,
+            enabled = state.userInfo != null,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Continuar con el pago")
+            Text("Realizar pago")
         }
     }
 }
