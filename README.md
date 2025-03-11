@@ -1,5 +1,5 @@
 
-# Cabify Challenge
+# Shop Challenge
 
 This project is a mobile app that allows users to browse a list of products, add them to their cart, and proceed to checkout with applied discounts. Built with production-ready standards, the app fetches product data from a remote source using Retrofit and uses Room for local data storage. The architecture follows Clean principles, structured with Jetpack Compose for a modern UI experience. Discounts, such as "2-for-1" and bulk pricing, are calculated dynamically to provide users with transparent pricing information. Basic unit and UI testing ensure reliability, with MutableStateFlow handling state management effectively.
 
