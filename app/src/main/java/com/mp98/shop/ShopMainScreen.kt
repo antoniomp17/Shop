@@ -25,43 +25,27 @@ fun ShopMainContent(
     productCartViewModel: ProductCartViewModel = hiltViewModel(),
     activity: MainActivity
 ) {
-    val state by productCartViewModel.productsCartState.collectAsState()
-    val context = LocalContext.current
 
     val credentialsResponse = activity.intent.getStringArrayListExtra("credentialsResponse")
-
-    LaunchedEffect(credentialsResponse) {
-        credentialsResponse?.let { credentials ->
-            val jsonCredentials = credentials.mapNotNull {
-                try {
-                    JSONObject(it)
-                } catch (e: Exception) {
-                    null
-                }
-            }
-            productCartViewModel.setSessionState(jsonCredentials)
-        }
-    }
-
-    LaunchedEffect(state.sessionUrl) {
-        state.sessionUrl?.let { url ->
-            val deepLinkUri = Uri.parse(url)
-            val intent = Intent(Intent.ACTION_VIEW, deepLinkUri).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            }
-
-            if (intent.resolveActivity(context.packageManager) != null) {
-                context.startActivity(intent)
-
-            } else {
-                Log.e("DeepLink", "No app found to handle the deep link")
-            }
-        }
-    }
 
     ShopTheme{
 
         val navHostController = rememberNavController()
+
+        LaunchedEffect(credentialsResponse) {
+            credentialsResponse?.let { credentials ->
+                val jsonCredentials = credentials.mapNotNull {
+                    try {
+                        JSONObject(it)
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+                productCartViewModel.setSessionState(jsonCredentials)
+                productCartViewModel.changeScreen(NavigationRoute.PaymentScreen)
+                navHostController.navigate(NavigationRoute.PaymentScreen.route)
+            }
+        }
 
         CustomScaffold(
             modifier = Modifier

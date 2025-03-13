@@ -62,19 +62,20 @@ class ProductCartViewModel @Inject constructor(
                     var cardExpiration: String? = null
 
                     for (json in sessionJsons) {
-                        when (json.optString("Document Type")) {
+                        val credentialSubjectJson = json.optJSONObject("credentialSubject")
+                        when (credentialSubjectJson?.optString("Document Type")) {
                             "Spain National Identity Document" -> {
-                                name = json.optString("First Name")
-                                lastName = json.optString("Last Name")
-                                address = json.optString("Address")
+                                name = credentialSubjectJson.optString("First Name")
+                                lastName = credentialSubjectJson.optString("Last Name")
+                                address = credentialSubjectJson.optString("Address")
                             }
                             "ContactCredential" -> {
-                                email = json.optString("Email")
+                                email = credentialSubjectJson.optString("Email")
                             }
                             "BankCredential" -> {
-                                cardNumber = json.optString("Card Number")
-                                cardHolder = json.optString("Card Holder")
-                                cardExpiration = json.optString("Card Expiration Date")
+                                cardNumber = credentialSubjectJson.optString("Card Number")
+                                cardHolder = credentialSubjectJson.optString("Card Holder")
+                                cardExpiration = credentialSubjectJson.optString("Card Expiration Date")
                             }
                         }
                     }

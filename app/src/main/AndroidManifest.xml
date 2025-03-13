@@ -8,9 +8,7 @@
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="openid4vp" />
+            <action android:name="io.identywallet.RECEIVE_VC_REQUEST" />
         </intent>
     </queries>
 
@@ -36,6 +34,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="io.identywallet.RECEIVE_VC_RESPONSE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

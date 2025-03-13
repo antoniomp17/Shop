@@ -64,6 +64,7 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel, onChangeScreen: () -> Uni
                     putStringArrayListExtra("requestedCredentials", requestedCredentials)
                     addCategory(Intent.CATEGORY_DEFAULT)
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT)
                 }
 
                 if (intent.resolveActivity(context.packageManager) != null) {
