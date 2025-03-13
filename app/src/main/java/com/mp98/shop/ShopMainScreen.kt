@@ -18,11 +18,30 @@ import com.mp98.shop.core.presentation.screens.navigation.NavigationHost
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
 import com.mp98.shop.core.presentation.viewmodels.ProductCartViewModel
 import com.mp98.shop.ui.theme.ShopTheme
+import org.json.JSONObject
 
 @Composable
-fun ShopMainContent(productCartViewModel: ProductCartViewModel = hiltViewModel()) {
+fun ShopMainContent(
+    productCartViewModel: ProductCartViewModel = hiltViewModel(),
+    activity: MainActivity
+) {
     val state by productCartViewModel.productsCartState.collectAsState()
     val context = LocalContext.current
+
+    val credentialsResponse = activity.intent.getStringArrayListExtra("credentialsResponse")
+
+    LaunchedEffect(credentialsResponse) {
+        credentialsResponse?.let { credentials ->
+            val jsonCredentials = credentials.mapNotNull {
+                try {
+                    JSONObject(it)
+                } catch (e: Exception) {
+                    null
+                }
+            }
+            productCartViewModel.setSessionState(jsonCredentials)
+        }
+    }
 
     LaunchedEffect(state.sessionUrl) {
         state.sessionUrl?.let { url ->

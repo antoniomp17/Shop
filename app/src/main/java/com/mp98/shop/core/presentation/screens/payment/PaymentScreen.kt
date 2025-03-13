@@ -1,5 +1,7 @@
 package com.mp98.shop.core.presentation.screens.payment
 
+import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mp98.shop.core.presentation.screens.navigation.NavigationRoute
@@ -28,8 +31,11 @@ import com.mp98.shop.core.utils.toCurrencyFormat
 
 @Composable
 fun PaymentScreen(cartViewModel: ProductCartViewModel, onChangeScreen: () -> Unit) {
+
     val state by cartViewModel.productsCartState.collectAsState()
     var selectedMethod by remember { mutableStateOf<String?>(null) }
+
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier
@@ -49,8 +55,22 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel, onChangeScreen: () -> Uni
 
         Button(
             onClick = {
+
                 selectedMethod = "identy"
-                cartViewModel.initVerifierSession()
+
+                val requestedCredentials = arrayListOf("DocumentId", "ContactCredential", "BankCredential")
+
+                val intent = Intent("io.identywallet.RECEIVE_VC_REQUEST").apply {
+                    putStringArrayListExtra("requestedCredentials", requestedCredentials)
+                    addCategory(Intent.CATEGORY_DEFAULT)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+
+                if (intent.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(intent)
+                } else {
+                    Log.e("VCRequest", "No app found to handle the VC request")
+                }
             },
             modifier = Modifier.fillMaxWidth()
         ) {

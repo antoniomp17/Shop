@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.util.Locale
 import javax.inject.Inject
 
@@ -89,7 +90,6 @@ class ProductCartViewModel @Inject constructor(
                             cardExpiration = cardExpiration ?: ""
                         )
                     )
-
                 }
             }
         }
@@ -118,6 +118,12 @@ class ProductCartViewModel @Inject constructor(
             }.onFailure {
                 _productsCartState.update { state -> state.copy(error = ErrorType.ERROR_LISTENING_SESSION) }
             }
+        }
+    }
+
+    fun setSessionState(sessionState: List<JSONObject>){
+        _productsCartState.update { state ->
+            state.copy(sessionState = sessionState)
         }
     }
 

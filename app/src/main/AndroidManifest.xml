@@ -32,8 +32,10 @@
             android:theme="@style/Theme.Shop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="io.identywallet.RECEIVE_VC_RESPONSE" />
             </intent-filter>
         </activity>
     </application>

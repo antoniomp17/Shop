@@ -14,7 +14,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShopTheme {
-                ShopMainContent()
+                ShopMainContent(
+                    activity = this
+                )
             }
         }
     }
