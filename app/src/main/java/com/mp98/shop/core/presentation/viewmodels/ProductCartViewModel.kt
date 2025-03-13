@@ -64,7 +64,7 @@ class ProductCartViewModel @Inject constructor(
                     for (json in sessionJsons) {
                         val credentialSubjectJson = json.optJSONObject("credentialSubject")
                         when (credentialSubjectJson?.optString("Document Type")) {
-                            "Spain National Identity Document" -> {
+                            "Document Id" -> {
                                 name = credentialSubjectJson.optString("First Name")
                                 lastName = credentialSubjectJson.optString("Last Name")
                                 address = credentialSubjectJson.optString("Address")
