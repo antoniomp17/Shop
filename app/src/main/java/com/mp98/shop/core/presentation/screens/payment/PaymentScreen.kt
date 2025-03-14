@@ -121,7 +121,6 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel, onChangeScreen: () -> Uni
                 Text("Nombre: ${state.userInfo?.name ?: "No disponible"}")
                 Text("Apellido: ${state.userInfo?.lastName ?: "No disponible"}")
                 Text("Email: ${state.userInfo?.email ?: "No disponible"}")
-                Text("Dirección: ${state.userInfo?.address ?: "No disponible"}")
 
                 Spacer(modifier = Modifier.height(8.dp))
 

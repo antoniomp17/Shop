@@ -56,7 +56,6 @@ class ProductCartViewModel @Inject constructor(
                     var name: String? = null
                     var lastName: String? = null
                     var email: String? = null
-                    var address: String? = null
                     var cardNumber: String? = null
                     var cardHolder: String? = null
                     var cardExpiration: String? = null
@@ -64,10 +63,17 @@ class ProductCartViewModel @Inject constructor(
                     for (json in sessionJsons) {
                         val credentialSubjectJson = json.optJSONObject("credentialSubject")
                         when (credentialSubjectJson?.optString("Document Type")) {
-                            "Document Id" -> {
+                            "Spain National Identity Document" -> {
                                 name = credentialSubjectJson.optString("First Name")
                                 lastName = credentialSubjectJson.optString("Last Name")
-                                address = credentialSubjectJson.optString("Address")
+                            }
+                            "Dominican Identity Document" -> {
+                                name = credentialSubjectJson.optString("First Name")
+                                lastName = credentialSubjectJson.optString("Last Name")
+                            }
+                            "Universal Passport" -> {
+                                name = credentialSubjectJson.optString("First Name")
+                                lastName = credentialSubjectJson.optString("Last Name")
                             }
                             "ContactCredential" -> {
                                 email = credentialSubjectJson.optString("Email")
@@ -85,7 +91,6 @@ class ProductCartViewModel @Inject constructor(
                             name = name ?: "",
                             lastName = lastName ?: "",
                             email = email ?: "",
-                            address = address ?: "",
                             cardNumber = cardNumber ?: "",
                             cardHolder = cardHolder ?: "",
                             cardExpiration = cardExpiration ?: ""
