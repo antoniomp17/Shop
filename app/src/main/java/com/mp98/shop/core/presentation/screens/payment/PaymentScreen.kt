@@ -58,7 +58,7 @@ fun PaymentScreen(cartViewModel: ProductCartViewModel, onChangeScreen: () -> Uni
 
                 selectedMethod = "identy"
 
-                val requestedCredentials = arrayListOf("DocumentId", "ContactCredential", "BankCredential")
+                val requestedCredentials = arrayListOf("Document ID verified", "Contact info verified", "Bank info verified")
 
                 val intent = Intent("io.identywallet.RECEIVE_VC_REQUEST").apply {
                     putStringArrayListExtra("requestedCredentials", requestedCredentials)
